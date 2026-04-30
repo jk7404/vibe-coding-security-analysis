@@ -15,11 +15,11 @@
 
 > Let me read the test file first to understand what's expected.
 
-**Read** c:\MEGA\NYUAD\3-2\Static Program Analysis\vscode\vibe-coding\test.py
+**Read** `c:\MEGA\NYUAD\3-2\Static Program Analysis\vscode\vibe-coding\test.py`
 
 > Now I have a clear picture of the three tests. Writing app.py to satisfy all of them.
 
-**Write** c:\MEGA\NYUAD\3-2\Static Program Analysis\vscode\vibe-coding\app.py
+**Write** `c:\MEGA\NYUAD\3-2\Static Program Analysis\vscode\vibe-coding\app.py`
 
 **Bash** Run the pytest suite
 
