@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — PassVault{% endblock %}
+
+{% block content %}
+<div class="page-header">
+  <h1>&#128272; My Vault
+    <span style="font-size:0.85rem;font-weight:400;color:var(--muted);margin-left:0.5rem;">
+      {{ credentials|length }} item{% if credentials|length != 1 %}s{% endif %}
+      {% if query %} matching "<em>{{ query }}</em>"{% endif %}
+    </span>
+  </h1>
+  <a href="{{ url_for('new_credential') }}" class="btn btn-success">&#43; Add Password</a>
+</div>
+
+<!-- Search bar -->
+<form method="get" action="{{ url_for('dashboard') }}" class="search-bar">
+  <input type="text" name="q" value="{{ query }}"
+         placeholder="Search by service, username, or URL…" autofocus>
+  <button type="submit" class="btn btn-ghost">Search</button>
+  {% if query %}
+    <a href="{{ url_for('dashboard') }}" class="btn btn-ghost">Clear</a>
+  {% endif %}
+</form>
+
+{% if credentials %}
+<div class="card" style="padding:0;overflow:hidden;">
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Service</th>
+          <th>Username</th>
+          <th>Password</th>
+          <th>URL</th>
+          <th>Updated</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for c in credentials %}
+        <tr>
+          <td>
+            <strong>{{ c.service_name }}</strong>
+          </td>
+
+          <td>
+            <span style="font-family:monospace;font-size:0.88rem;">{{ c.username }}</span>
+            <button class="pw-toggle" onclick="copyField(this)" data-val="{{ c.username }}"
+                    title="Copy username">&#128203;</button>
+          </td>
+
+          <td>
+            <div class="pw-cell">
+              <span class="pw-mask">••••••••</span>
+              <button class="pw-toggle" onclick="togglePw(this)"
+                      data-pw="{{ c.password_plain }}" title="Show/hide">&#128065;</button>
+              <button class="pw-toggle" onclick="copyPw(this)"
+                      data-pw="{{ c.password_plain }}" title="Copy password">&#128203;</button>
+              <span class="copied-badge">Copied!</span>
+            </div>
+          </td>
+
+          <td>
+            {% if c.url %}
+              <a class="url-link" href="{{ c.url }}" target="_blank" rel="noopener noreferrer"
+                 title="{{ c.url }}">
+                {{ c.url | truncate(30, True) }}
+              </a>
+            {% else %}
+              <span style="color:var(--muted)">—</span>
+            {% endif %}
+          </td>
+
+          <td style="color:var(--muted);font-size:0.82rem;white-space:nowrap;">
+            {{ c.updated_at[:10] if c.updated_at else c.created_at[:10] }}
+          </td>
+
+          <td>
+            <div style="display:flex;gap:0.4rem;flex-wrap:wrap;">
+              <a href="{{ url_for('edit_credential', cred_id=c.id) }}"
+                 class="btn btn-ghost btn-sm">&#9998; Edit</a>
+
+              <form method="post" action="{{ url_for('delete_credential', cred_id=c.id) }}"
+                    onsubmit="event.preventDefault(); confirmDelete(this);">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="btn btn-danger btn-sm">&#128465; Delete</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% else %}
+<div class="empty">
+  <div class="icon">&#128274;</div>
+  {% if query %}
+    <p>No results for "<strong>{{ query }}</strong>".</p>
+    <a href="{{ url_for('dashboard') }}" style="color:var(--accent);">Clear search</a>
+  {% else %}
+    <p>Your vault is empty.</p>
+    <a href="{{ url_for('new_credential') }}" class="btn btn-success" style="margin-top:1rem;">
+      &#43; Add your first password
+    </a>
+  {% endif %}
+</div>
+{% endif %}
+
+<script>
+  function copyField(btn) {
+    navigator.clipboard.writeText(btn.dataset.val).then(() => {
+      const orig = btn.textContent;
+      btn.textContent = '✓';
+      setTimeout(() => btn.textContent = orig, 1200);
+    });
+  }
+</script>
+{% endblock %}

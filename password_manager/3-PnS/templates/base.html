@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Password Manager{% endblock %}</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0f1117;
+      --surface: #1a1d27;
+      --border:  #2e3147;
+      --accent:  #6c63ff;
+      --accent2: #4ecca3;
+      --text:    #e2e8f0;
+      --muted:   #8892a4;
+      --danger:  #e05252;
+      --success: #3ddc84;
+      --warning: #f5a623;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── Nav ── */
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+    .nav-brand {
+      font-weight: 700;
+      font-size: 1.15rem;
+      color: var(--accent);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .nav-links { display: flex; gap: 1rem; align-items: center; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-user {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    /* ── Layout ── */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+    .container-sm {
+      max-width: 440px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2rem;
+    }
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+
+    /* ── Forms ── */
+    .form-group { margin-bottom: 1.1rem; }
+    label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="url"],
+    textarea {
+      width: 100%;
+      padding: 0.6rem 0.85rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    input:focus, textarea:focus { border-color: var(--accent); }
+    textarea { resize: vertical; min-height: 70px; font-family: inherit; }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.55rem 1.2rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: opacity 0.15s, transform 0.1s;
+      text-decoration: none;
+    }
+    .btn:hover { opacity: 0.88; transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+    .btn-primary  { background: var(--accent);  color: #fff; }
+    .btn-success  { background: var(--accent2); color: #0f1117; }
+    .btn-danger   { background: var(--danger);  color: #fff; }
+    .btn-ghost    { background: transparent; border: 1px solid var(--border); color: var(--muted); }
+    .btn-sm       { padding: 0.35rem 0.8rem; font-size: 0.8rem; }
+
+    /* ── Alerts ── */
+    .flash-list { margin-bottom: 1.2rem; }
+    .alert {
+      padding: 0.7rem 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      border-left: 4px solid transparent;
+    }
+    .alert-danger  { background: rgba(224,82,82,.12);  border-color: var(--danger);  color: #f09898; }
+    .alert-success { background: rgba(61,220,132,.12); border-color: var(--success); color: #7decb4; }
+    .alert-info    { background: rgba(108,99,255,.12); border-color: var(--accent);  color: #ada8ff; }
+    .alert-warning { background: rgba(245,166,35,.12); border-color: var(--warning); color: #f5c97a; }
+
+    /* ── Table ── */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th {
+      text-align: left;
+      padding: 0.6rem 0.9rem;
+      color: var(--muted);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 0.75rem 0.9rem;
+      border-bottom: 1px solid rgba(46,49,71,0.6);
+      vertical-align: middle;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(108,99,255,0.04); }
+
+    /* ── Password field ── */
+    .pw-cell { display: flex; align-items: center; gap: 0.4rem; }
+    .pw-mask { letter-spacing: 0.15em; color: var(--muted); }
+    .pw-toggle {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 0.85rem;
+      padding: 0.1rem 0.3rem;
+      border-radius: 4px;
+      transition: color 0.15s;
+    }
+    .pw-toggle:hover { color: var(--accent); }
+
+    /* ── Search bar ── */
+    .search-bar {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+      align-items: center;
+    }
+    .search-bar input {
+      flex: 1;
+      padding: 0.6rem 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .search-bar input:focus { border-color: var(--accent); }
+
+    /* ── Page header ── */
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+    }
+    .page-header h1 { font-size: 1.4rem; font-weight: 700; }
+
+    /* ── Empty state ── */
+    .empty {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--muted);
+    }
+    .empty .icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+
+    /* ── URL link ── */
+    a.url-link { color: var(--accent2); font-size: 0.85rem; text-decoration: none; }
+    a.url-link:hover { text-decoration: underline; }
+
+    /* ── Auth page ── */
+    .auth-title {
+      font-size: 1.6rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 0.3rem;
+    }
+    .auth-sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.8rem;
+    }
+    .auth-footer {
+      text-align: center;
+      margin-top: 1.2rem;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .auth-footer a { color: var(--accent); text-decoration: none; }
+    .auth-footer a:hover { text-decoration: underline; }
+
+    /* ── Copy badge ── */
+    .copied-badge {
+      font-size: 0.7rem;
+      background: var(--accent2);
+      color: #0f1117;
+      border-radius: 4px;
+      padding: 0.1rem 0.4rem;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+{% if session.get('user_id') %}
+<nav>
+  <a class="nav-brand" href="{{ url_for('dashboard') }}">&#128274; PassVault</a>
+  <div class="nav-links">
+    <span class="nav-user">👤 {{ session.username }}</span>
+    <a href="{{ url_for('logout') }}">Log out</a>
+  </div>
+</nav>
+{% endif %}
+
+<div class="{% block wrap_class %}container{% endblock %}">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="flash-list">
+        {% for cat, msg in messages %}
+          <div class="alert alert-{{ cat }}">{{ msg }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  {% block content %}{% endblock %}
+</div>
+
+<script>
+  /* Toggle password visibility */
+  function togglePw(btn) {
+    const cell = btn.closest('.pw-cell');
+    const mask = cell.querySelector('.pw-mask');
+    const plain = btn.dataset.pw;
+    if (mask.textContent === '••••••••') {
+      mask.textContent = plain;
+      btn.textContent = '🙈';
+    } else {
+      mask.textContent = '••••••••';
+      btn.textContent = '👁';
+    }
+  }
+
+  /* Copy password to clipboard */
+  function copyPw(btn) {
+    const pw = btn.dataset.pw;
+    navigator.clipboard.writeText(pw).then(() => {
+      const badge = btn.nextElementSibling;
+      badge.style.display = 'inline';
+      setTimeout(() => badge.style.display = 'none', 1500);
+    });
+  }
+
+  /* Confirm delete */
+  function confirmDelete(form) {
+    if (confirm('Delete this credential? This cannot be undone.')) {
+      form.submit();
+    }
+  }
+</script>
+</body>
+</html>
