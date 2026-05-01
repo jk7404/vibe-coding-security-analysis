@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}Register - Password Manager{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="card">
+        <div class="card-body p-5">
+            <h2 class="text-center mb-4">
+                <i class="bi bi-person-plus-fill text-primary"></i> Create Account
+            </h2>
+
+            <form method="POST">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-person"></i></span>
+                        <input type="text" class="form-control" id="username" name="username" required autofocus>
+                    </div>
+                    <small class="password-hint">3-20 characters, letters, numbers, hyphens, underscores only</small>
+                </div>
+
+                <div class="mb-3">
+                    <label for="master_password" class="form-label">Master Password</label>
+                    <div class="input-group password-field">
+                        <span class="input-group-text"><i class="bi bi-key"></i></span>
+                        <input type="password" class="form-control" id="master_password" name="master_password" required onchange="checkPasswordStrength()">
+                        <button type="button" class="show-password-btn" onclick="togglePasswordVisibility('master_password')">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+                    <div id="password-strength" class="password-strength"></div>
+                    <small class="password-hint">
+                        <strong>Requirements:</strong>
+                        <ul style="margin-top: 0.5rem; padding-left: 1.5rem;">
+                            <li>At least 12 characters</li>
+                            <li>One uppercase letter (A-Z)</li>
+                            <li>One lowercase letter (a-z)</li>
+                            <li>One number (0-9)</li>
+                            <li>One special character (!@#$%^&*)</li>
+                        </ul>
+                    </small>
+                </div>
+
+                <div class="mb-3">
+                    <label for="confirm_password" class="form-label">Confirm Master Password</label>
+                    <div class="input-group password-field">
+                        <span class="input-group-text"><i class="bi bi-key"></i></span>
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                        <button type="button" class="show-password-btn" onclick="togglePasswordVisibility('confirm_password')">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 mb-3">
+                    <i class="bi bi-person-check"></i> Create Account
+                </button>
+            </form>
+
+            <div class="text-center">
+                <p class="text-muted">Already have an account?
+                    <a href="{{ url_for('login') }}" class="text-decoration-none">
+                        <strong>Login here</strong>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="alert alert-warning mt-4">
+        <i class="bi bi-exclamation-triangle"></i> <strong>⚠️ Important:</strong> Your master password <strong>cannot be recovered</strong> if forgotten. Write it down in a safe location. All your passwords are encrypted with it.
+    </div>
+</div>
+
+<script>
+    function checkPasswordStrength() {
+        const pwd = document.getElementById('master_password').value;
+        const strengthBar = document.getElementById('password-strength');
+
+        let strength = 0;
+        if (pwd.length >= 12) strength++;
+        if (/[A-Z]/.test(pwd)) strength++;
+        if (/[a-z]/.test(pwd)) strength++;
+        if (/[0-9]/.test(pwd)) strength++;
+        if (/[!@#$%^&*(),.?":{}|<>]/.test(pwd)) strength++;
+
+        strengthBar.classList.remove('weak', 'medium', 'strong');
+        if (strength <= 2) {
+            strengthBar.classList.add('weak');
+        } else if (strength <= 4) {
+            strengthBar.classList.add('medium');
+        } else {
+            strengthBar.classList.add('strong');
+        }
+    }
+</script>
+{% endblock %}
