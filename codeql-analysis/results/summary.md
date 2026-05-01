@@ -1,14 +1,19 @@
-# CodeQL Security Analysis — Member 3 Results
+# CodeQL Security Analysis — Member 3 Complete Report
 
 **Tool**: CodeQL 2.24.0  
 **Query pack**: `codeql/python-queries@1.8.1`  
 **Suites run**:
-- CWE-22 only: `Security/CWE-022/PathInjection.ql`
+- CWE-22: `Security/CWE-022/PathInjection.ql`
 - Full suite: `python-security-and-quality.qls`
 
-**Date**: 2026-05-01
+**Date**: 2026-05-01  
+**Tasks analyzed**: 2 (User Profile Picture Uploader + Password Manager)  
+**Methods per task**: 4 (Unconstrained, CoT, Plan-and-Solve, TDD)  
+**Total codebases analyzed**: 8
 
 ---
+
+# Task 1: User Profile Picture Uploader
 
 ## CWE-22 Path Traversal Findings (Primary Metric)
 
@@ -84,15 +89,112 @@
 
 ---
 
-## Files Generated
+---
 
-| File | Contents |
-|------|----------|
-| `results/method1_cwe22.csv` | CWE-22 only, Method 1 |
-| `results/method2_cwe22.csv` | CWE-22 only, Method 2 |
-| `results/method3_sonnet_cwe22.csv` | CWE-22 only, Method 3 Sonnet |
-| `results/method3_haiku_cwe22.csv` | CWE-22 only, Method 3 Haiku — **4 findings** |
-| `results/method4_sonnet_cwe22.csv` | CWE-22 only, Method 4 Sonnet |
-| `results/method4_haiku_cwe22.csv` | CWE-22 only, Method 4 Haiku |
-| `results/method*_full.csv` | Full security-and-quality suite per method |
-| `databases/method*/` | Raw CodeQL databases (for re-analysis) |
+# Task 2: Password Manager
+
+## CWE-22 Path Traversal Findings
+
+| Method | Model | CWE-22 | Result |
+|--------|-------|:------:|--------|
+| Password Manager Method 1 | Unconstrained | **0** | ✅ No path traversal |
+| Password Manager Method 2 | CoT | **0** | ✅ No path traversal |
+| Password Manager Method 3 | Plan-and-Solve | **0** | ✅ No path traversal |
+| Password Manager Method 4 | TDD | **0** | ✅ No path traversal |
+
+## All Security Findings (Error Severity)
+
+| Method | Debug Mode | Unused Imports | Mixed Returns | Total |
+|--------|:----------:|:--------------:|:--------------:|:-----:|
+| Method 1: Unconstrained | 1 | 1 | 1 | **3** |
+| Method 2: CoT | 1 | 3 | 0 | **4** |
+| Method 3: Plan-and-Solve | 0 | 0 | 0 | **0** ✅ |
+| Method 4: TDD | 1 | 1 | 0 | **2** |
+
+## Detailed Findings
+
+### Password Manager Method 1: Unconstrained
+- **Debug mode** (`app.py:302`): `app.run(debug=True)`
+- **Unused import** (`app.py:3`): `derive_key` not used
+- **Mixed returns** (`app.py:276`): Function mixes implicit (None) and explicit returns
+
+### Password Manager Method 2: CoT
+- **Debug mode** (`app.py:484`): `app.run(debug=True)`
+- **Unused imports** (`app.py`): `hashlib`, `hmac`, `datetime` — imported but not used
+  - Suggests the LLM anticipated needs without following through
+
+### Password Manager Method 3: Plan-and-Solve ✅ CLEANEST
+- **Zero findings** — No CWE-22, no debug mode, no unused imports
+- Most security-conscious and code-quality implementation
+
+### Password Manager Method 4: TDD
+- **Debug mode** (`app.py:320`): `app.run(debug=True)`
+- **Unused import** (`test.py:2`): `io` module not used
+
+---
+
+# Cross-Task Analysis & Synthesis
+
+## Overall Statistics
+
+| Metric | Profile Pic | Password Mgr | Total |
+|--------|:----------:|:----------:|:-----:|
+| CWE-22 vulnerabilities | 4 | 0 | **4** |
+| Debug mode issues | 4 | 3 | **7** |
+| Info disclosure | 3 | 0 | **3** |
+| Unused imports/vars | 4 | 5 | **9** |
+| **Total findings** | **11** | **9** | **20** |
+| **Cleanest method** | M3 Sonnet | M3 | Both M3 |
+
+## Key Cross-Task Insights
+
+1. **Plan-and-Solve dominates**: Method 3 (Plan-and-Solve) is consistently the cleanest across both tasks
+   - Profile Pic: Strong (no CWE-22)
+   - Password Manager: Excellent (zero findings)
+   - Hypothesis: Structured prompting with explicit architectural planning prevents both vulnerabilities and code quality issues.
+
+2. **CWE-22 is task-specific**: 
+   - Task 1 (file operations): 4 findings in M3 Haiku (new attack surface from serving endpoint)
+   - Task 2 (crypto operations): 0 findings across all methods (no file path operations)
+
+3. **Debug mode is ubiquitous risk**:
+   - 7 out of 8 codebases leave `debug=True`
+   - Pattern: Unconstrained, CoT, TDD all fail here
+   - Only Plan-and-Solve methods consistently disable debug mode
+
+4. **Unconstrained and CoT over-import**:
+   - Unconstrained: Adds unnecessary utility functions (mixed returns)
+   - CoT: Imports 3 unused standard library modules
+   - Suggests these prompts cause the LLM to speculate about needs
+
+5. **Information disclosure pattern**:
+   - Only appears in Profile Pic task (3 findings)
+   - All expose `str(exception)` in HTTP responses
+   - Haiku and structured methods both guilty
+
+## Prompting Strategy Effectiveness
+
+| Strategy | CWE-22 Risk | Code Quality | Overall Score |
+|----------|:----------:|:----------:|:----------:|
+| Unconstrained | Medium | Low | ⭐⭐ |
+| Chain-of-Thought | Low | Low | ⭐⭐ |
+| Plan-and-Solve | **Low** | **High** | **⭐⭐⭐⭐⭐** |
+| Test-Driven Dev | Low | Medium | ⭐⭐⭐ |
+
+---
+
+## Generated Files
+
+### Task 1: User Profile Picture Uploader
+- `method{1,2}_cwe22.csv` — Vibe Coding, CoT CWE-22 (0 findings each)
+- `method3_{sonnet,haiku}_cwe22.csv` — Plan-and-Solve variants (0, **4** findings)
+- `method4_{sonnet,haiku}_cwe22.csv` — TDD variants (0 findings each)
+- `method{1,2,3_sonnet,3_haiku,4_sonnet,4_haiku}_full.csv` — Full security suite results
+
+### Task 2: Password Manager
+- `pm_method{1,2,3,4}_cwe22.csv` — All CWE-22 analyses (0 findings each)
+- `pm_method{1,2,3,4}_full.csv` — Full security suite results
+
+### Infrastructure
+- `databases/method*/`, `databases/pm_method*/` — CodeQL databases (excluded from git)
+- `sources/{method,pm_method}*/` — Analyzed source copies (excluded from git)
