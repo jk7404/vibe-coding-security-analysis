@@ -1,0 +1,4 @@
+"Flask app is run in debug mode","Running a Flask app in debug mode may allow an attacker to run arbitrary code through the Werkzeug debugger.","error","A Flask app appears to be run in debug mode. This may allow an attacker to run arbitrary code through the debugger.","/app.py","484","5","484","52"
+"Unused import","Import is not required as it is not used","recommendation","Import of 'hashlib' is not used.","/app.py","7","1","7","14"
+"Unused import","Import is not required as it is not used","recommendation","Import of 'hmac' is not used.","/app.py","8","1","8","11"
+"Unused import","Import is not required as it is not used","recommendation","Import of 'datetime' is not used.","/app.py","10","1","10","29"
