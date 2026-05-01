@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Register - Password Manager{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <h1>🔐 Password Manager</h1>
+            <p>Create Your Account</p>
+        </div>
+
+        <form id="registerForm" class="auth-form">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required placeholder="Choose a username">
+            </div>
+
+            <div class="form-group">
+                <label for="master_password">Master Password</label>
+                <input type="password" id="master_password" name="master_password" required placeholder="Create a strong master password" minlength="8">
+                <small>Must be at least 8 characters</small>
+            </div>
+
+            <div class="form-group">
+                <label for="confirm_password">Confirm Master Password</label>
+                <input type="password" id="confirm_password" name="confirm_password" required placeholder="Confirm your master password" minlength="8">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Register</button>
+        </form>
+
+        <p class="auth-switch">Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+
+        <div id="error" class="error-message" style="display: none;"></div>
+    </div>
+</div>
+
+<script>
+document.getElementById('registerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const errorDiv = document.getElementById('error');
+
+    const password = document.getElementById('master_password').value;
+    const confirm = document.getElementById('confirm_password').value;
+
+    if (password !== confirm) {
+        errorDiv.textContent = 'Passwords do not match';
+        errorDiv.style.display = 'block';
+        return;
+    }
+
+    const formData = {
+        username: document.getElementById('username').value,
+        master_password: password,
+        confirm_password: confirm
+    };
+
+    try {
+        const response = await fetch('/register', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify(formData)
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            window.location.href = data.redirect;
+        } else {
+            errorDiv.textContent = data.error;
+            errorDiv.style.display = 'block';
+        }
+    } catch (error) {
+        errorDiv.textContent = 'An error occurred. Please try again.';
+        errorDiv.style.display = 'block';
+    }
+});
+</script>
+{% endblock %}
