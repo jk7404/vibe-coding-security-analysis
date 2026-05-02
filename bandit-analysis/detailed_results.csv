@@ -1,0 +1,30 @@
+task,method,filename,severity,confidence,test_id,test_name,issue_text,line_number
+uploader,vibe,app.py,HIGH,MEDIUM,B201,flask_debug_true,"A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",39
+uploader,cot,app.py,HIGH,MEDIUM,B201,flask_debug_true,"A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",48
+uploader,pns,app.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'dev-secret-key-change-in-production',14
+uploader,tdd,app.py,HIGH,MEDIUM,B201,flask_debug_true,"A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",51
+uploader,tdd,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,14
+uploader,tdd,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,23
+uploader,tdd,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,24
+uploader,tdd,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,30
+uploader,tdd,app.py,HIGH,MEDIUM,B201,flask_debug_true,"A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",41
+uploader,tdd,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,14
+uploader,tdd,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,23
+uploader,tdd,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,24
+uploader,tdd,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,30
+password_manager,vibe,app.py,HIGH,MEDIUM,B201,flask_debug_true,"A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",302
+password_manager,vibe,utils.py,LOW,HIGH,B311,blacklist,Standard pseudo-random generators are not suitable for security/cryptographic purposes.,22
+password_manager,cot,app.py,HIGH,MEDIUM,B201,flask_debug_true,"A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",484
+password_manager,pns,app.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: '⚠ decryption error',242
+password_manager,pns,app.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: '',325
+password_manager,tdd,app.py,HIGH,MEDIUM,B201,flask_debug_true,"A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",320
+password_manager,tdd,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'passwordB',20
+password_manager,tdd,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'passwordB',21
+password_manager,tdd,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'B_SECRET_123',24
+password_manager,tdd,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'passwordA',28
+password_manager,tdd,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'passwordA',29
+password_manager,tdd,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,35
+password_manager,tdd,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,36
+password_manager,tdd,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'password',43
+password_manager,tdd,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'password',44
+password_manager,tdd,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,51

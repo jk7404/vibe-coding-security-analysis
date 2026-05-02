@@ -1,0 +1,9 @@
+task,method,total_issues,high,medium,low
+uploader,vibe,1,1,0,0
+uploader,cot,1,1,0,0
+uploader,pns,1,0,0,1
+uploader,tdd,10,2,0,8
+password_manager,vibe,2,1,0,1
+password_manager,cot,1,1,0,0
+password_manager,pns,2,0,0,2
+password_manager,tdd,11,1,0,10
