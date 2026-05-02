@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log File Search Utility</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; max-width: 900px; margin: auto; background-color: #f4f4f9; }
+        h1 { color: #333; border-bottom: 2px solid #ccc; padding-bottom: 10px; }
+        .container { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        form { display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; padding: 20px; border: 1px solid #ddd; border-radius: 6px; background-color: #fafafa;}
+        input[type="text"], button { padding: 10px; border-radius: 4px; border: 1px solid #ccc; font-size: 16px; }
+        button { background-color: #007bff; color: white; border: none; cursor: pointer; transition: background-color 0.3s; }
+        button:hover { background-color: #0056b3; }
+        .error { color: red; font-weight: bold; padding: 10px; border: 1px solid red; background-color: #ffeeee; border-radius: 4px; }
+        .results-box { margin-top: 20px; padding: 15px; border: 1px dashed #007bff; background-color: #e6f0ff; border-radius: 4px; white-space: pre-wrap; word-wrap: break-word; }
+        .log-path { font-size: 0.9em; color: #666; margin-top: 10px; display: block;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Log File Search</h1>
+        <p class="log-path">Searching within the directory: <strong>{{ log_dir }}</strong></p>
+
+        {% if error %}
+            <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <form action="/search" method="POST">
+            <div>
+                <label for="filename">Log File Name (e.g., syslog, apache2/error.log):</label>
+                <input type="text" id="filename" name="filename" value="{{ filename if filename else '' }}" required placeholder="Enter the filename">
+            </div>
+            <div>
+                <label for="search_term">Search Term (Keyword):</label>
+                <input type="text" id="search_term" name="search_term" required placeholder="Enter the keyword to search for (e.g., error, failed)">
+            </div>
+            <button type="submit">Search Logs</button>
+        </form>
+
+        {% if results %}
+        <h2>🔍 Search Results</h2>
+        <p><strong>File:</strong> <code>{{ filename }}</code> | <strong>Term:</strong> <code>{{ search_term }}</code></p>
+        <div class="results-box">
+            {{ results | safe }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

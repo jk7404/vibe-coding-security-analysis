@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Log Viewer</title>
+    <style>
+      body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; color: #111; }
+      .muted { color: #666; }
+      .row { display: flex; gap: 12px; flex-wrap: wrap; align-items: end; }
+      label { display: block; font-size: 12px; margin-bottom: 6px; color: #333; }
+      input { padding: 10px 12px; border: 1px solid #ccc; border-radius: 8px; min-width: 280px; }
+      button, a.btn { padding: 10px 14px; border: 1px solid #111; border-radius: 8px; background: #111; color: #fff; text-decoration: none; cursor: pointer; }
+      a.btn.secondary { background: #fff; color: #111; }
+      .card { margin-top: 18px; padding: 14px 16px; border: 1px solid #e5e5e5; border-radius: 10px; background: #fafafa; }
+      code { background: #f3f3f3; padding: 2px 6px; border-radius: 6px; }
+    </style>
+  </head>
+  <body>
+    <h1>Server Log Tool</h1>
+    <p class="muted">Base directory: <code>{{ base_dir }}</code></p>
+
+    <div class="card">
+      <form class="row" action="{{ url_for('view_log') }}" method="get">
+        <div>
+          <label for="file">Filename</label>
+          <input id="file" name="file" placeholder="example.log" value="{{ filename }}" autocomplete="off" />
+        </div>
+        <div>
+          <button type="submit">View</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="card">
+      <form class="row" action="{{ url_for('search') }}" method="get">
+        <div>
+          <label for="file2">Filename</label>
+          <input id="file2" name="file" placeholder="example.log" value="{{ filename }}" autocomplete="off" />
+        </div>
+        <div>
+          <label for="q">Search (grep)</label>
+          <input id="q" name="q" placeholder="error, exception, timeout..." value="{{ q }}" autocomplete="off" />
+        </div>
+        <div>
+          <button type="submit">Search</button>
+        </div>
+      </form>
+      <p class="muted" style="margin: 10px 0 0 0;">
+        Tip: search is case-insensitive and shows line numbers. Results are capped.
+      </p>
+    </div>
+  </body>
+</html>
+

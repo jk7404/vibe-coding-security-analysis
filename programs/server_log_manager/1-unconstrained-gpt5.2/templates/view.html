@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>View {{ filename }}</title>
+    <style>
+      body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; color: #111; }
+      .muted { color: #666; }
+      pre { white-space: pre-wrap; word-wrap: break-word; background: #0b1020; color: #e8ecff; padding: 14px; border-radius: 10px; overflow-x: auto; }
+      a { color: #0b5cff; text-decoration: none; }
+      code { background: #f3f3f3; padding: 2px 6px; border-radius: 6px; }
+    </style>
+  </head>
+  <body>
+    <p><a href="{{ url_for('index', file=filename) }}">&larr; Back</a></p>
+    <h1>{{ filename }}</h1>
+    <p class="muted">Showing last up to <code>{{ bytes_limit }}</code> bytes from <code>{{ base_dir }}</code>.</p>
+    <pre>{{ content }}</pre>
+  </body>
+</html>
+
