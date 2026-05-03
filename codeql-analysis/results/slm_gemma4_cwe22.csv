@@ -1,1 +1,0 @@
-"Uncontrolled data used in path expression","Accessing paths influenced by users can allow an attacker to access unexpected resources.","error","This path depends on a [[""user-provided value""|""relative:///app.py:2:43:2:49""]].","/app.py","33","27","33","35"

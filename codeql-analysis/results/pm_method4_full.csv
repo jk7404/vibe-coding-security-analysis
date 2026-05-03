@@ -1,2 +1,0 @@
-"Flask app is run in debug mode","Running a Flask app in debug mode may allow an attacker to run arbitrary code through the Werkzeug debugger.","error","A Flask app appears to be run in debug mode. This may allow an attacker to run arbitrary code through the debugger.","/app.py","320","5","320","23"
-"Unused import","Import is not required as it is not used","recommendation","Import of 'io' is not used.","/test.py","2","1","2","9"
