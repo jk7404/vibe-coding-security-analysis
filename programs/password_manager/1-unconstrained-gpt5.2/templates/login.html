@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% set title = "Sign in" %}
+{% block content %}
+  <div class="card">
+    <h1>Sign in</h1>
+    <form method="post">
+      {{ form.hidden_tag() }}
+      <label>
+        Email
+        {{ form.email(class_="input", placeholder="you@example.com") }}
+        {% for e in form.email.errors %}<div class="error">{{ e }}</div>{% endfor %}
+      </label>
+      <label>
+        Password
+        {{ form.password(class_="input") }}
+        {% for e in form.password.errors %}<div class="error">{{ e }}</div>{% endfor %}
+      </label>
+      <div class="row">
+        <button class="btn" type="submit">{{ form.submit.label.text }}</button>
+        <a class="btn btn-ghost" href="{{ url_for('register') }}">Register</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}
+

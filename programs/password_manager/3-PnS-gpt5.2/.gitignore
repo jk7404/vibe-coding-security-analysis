@@ -1,0 +1,7 @@
+.secrets.env
+vault.db
+__pycache__/
+*.pyc
+.venv/
+.env
+

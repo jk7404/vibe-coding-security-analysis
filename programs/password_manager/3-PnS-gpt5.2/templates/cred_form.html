@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% if mode == "new" %}
+  {% set title = "New Entry" %}
+{% else %}
+  {% set title = "Edit Entry" %}
+{% endif %}
+{% block content %}
+  <div class="card">
+    <h1>{{ title }}</h1>
+    <form method="post">
+      {{ form.csrf_token }}
+      <label>Service name</label>
+      {{ form.service_name(class_="input", autocomplete="off") }}
+      {% for e in form.service_name.errors %}<div class="error">{{ e }}</div>{% endfor %}
+
+      <label>Username</label>
+      {{ form.account_username(class_="input", autocomplete="off") }}
+      {% for e in form.account_username.errors %}<div class="error">{{ e }}</div>{% endfor %}
+
+      <label>Password</label>
+      {{ form.password(class_="input", autocomplete="new-password") }}
+      {% for e in form.password.errors %}<div class="error">{{ e }}</div>{% endfor %}
+
+      <label>URL (http/https only)</label>
+      {{ form.url(class_="input", autocomplete="off") }}
+      {% for e in form.url.errors %}<div class="error">{{ e }}</div>{% endfor %}
+
+      <div class="actions">
+        {{ form.submit(class_="btn btn-primary") }}
+        <a class="btn btn-secondary" href="{{ url_for('vault') }}">Cancel</a>
+      </div>
+    </form>
+  </div>
+{% endblock %}
+

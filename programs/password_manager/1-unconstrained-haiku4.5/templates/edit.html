@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Credential - Password Manager{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 30px auto;">
+    <div class="card">
+        <h2 style="margin-bottom: 30px; color: #333;">Edit {{ credential.service_name }}</h2>
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="service_name">Service Name *</label>
+                <input type="text" id="service_name" name="service_name" value="{{ credential.service_name }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="username">Username/Email *</label>
+                <input type="text" id="username" name="username" value="{{ credential.username }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password (leave empty to keep current)</label>
+                <input type="password" id="password" name="password" placeholder="Leave empty to keep existing password">
+            </div>
+
+            <div class="form-group">
+                <label for="url">URL</label>
+                <input type="url" id="url" name="url" value="{{ credential.url or '' }}">
+            </div>
+
+            <div class="form-group">
+                <label for="notes">Notes</label>
+                <textarea id="notes" name="notes">{{ credential.notes or '' }}</textarea>
+            </div>
+
+            <div style="display: flex; gap: 10px;">
+                <button type="submit" class="btn btn-primary" style="flex: 1;">Save Changes</button>
+                <a href="{{ url_for('dashboard') }}" class="btn btn-secondary" style="flex: 1; text-align: center;">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

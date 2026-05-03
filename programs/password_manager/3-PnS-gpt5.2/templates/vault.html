@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% set title = "Vault" %}
+{% block content %}
+  <div class="row">
+    <h1>Your vault</h1>
+    <a class="btn btn-primary" href="{{ url_for('cred_new') }}">New entry</a>
+  </div>
+
+  <form method="get" action="{{ url_for('vault') }}" class="search">
+    <input class="input" type="search" name="q" placeholder="Search service / username / URL" value="{{ q }}">
+    <button class="btn btn-secondary" type="submit">Search</button>
+    {% if q %}
+      <a class="btn btn-secondary" href="{{ url_for('vault') }}">Clear</a>
+    {% endif %}
+  </form>
+
+  {% if creds %}
+    <div class="table">
+      <div class="thead">
+        <div>Service</div>
+        <div>Username</div>
+        <div>URL</div>
+        <div class="right">Actions</div>
+      </div>
+      {% for c in creds %}
+        <div class="trow">
+          <div class="mono">{{ c.service_name }}</div>
+          <div>{{ c.account_username }}</div>
+          <div>
+            {% if c.url %}
+              <a href="{{ c.url }}" rel="noreferrer" target="_blank">{{ c.url }}</a>
+            {% else %}
+              <span class="muted">—</span>
+            {% endif %}
+          </div>
+          <div class="right">
+            <a class="btn btn-secondary" href="{{ url_for('cred_reveal', cred_id=c.id) }}">Reveal</a>
+            <a class="btn btn-secondary" href="{{ url_for('cred_edit', cred_id=c.id) }}">Edit</a>
+            <form method="post" action="{{ url_for('cred_delete', cred_id=c.id) }}" class="inline" onsubmit="return confirm('Delete this entry?');">
+              {{ csrf_token() }}
+              <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="card muted">No entries yet.</div>
+  {% endif %}
+{% endblock %}
+

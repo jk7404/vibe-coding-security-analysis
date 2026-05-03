@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Password Manager{% endblock %}
+
+{% block content %}
+<div class="dashboard">
+    <div class="dashboard-header">
+        <h1>Your Passwords</h1>
+        <a href="{{ url_for('vault.add_credential') }}" class="btn btn-success">+ Add Credential</a>
+    </div>
+
+    <div class="search-container">
+        <form method="GET" class="search-form">
+            <input type="text" name="q" class="search-input" placeholder="Search by service or username..." value="{{ search_query }}">
+            <button type="submit" class="btn btn-primary">Search</button>
+            {% if search_query %}
+                <a href="{{ url_for('vault.dashboard') }}" class="btn btn-secondary">Clear</a>
+            {% endif %}
+        </form>
+    </div>
+
+    {% if credentials %}
+        <div class="credentials-grid">
+            {% for credential in credentials %}
+                <div class="credential-card">
+                    <div class="credential-header">
+                        <h3>{{ credential.service_name }}</h3>
+                        {% if credential.url %}
+                            <a href="{{ credential.url }}" target="_blank" class="credential-url" title="Visit">🔗</a>
+                        {% endif %}
+                    </div>
+
+                    <div class="credential-body">
+                        <p><strong>Username:</strong> <span class="cred-username">{{ credential.username_field }}</span></p>
+                        <p>
+                            <strong>Password:</strong>
+                            <span class="password-field">
+                                <span class="masked-password" data-cred-id="{{ credential.id }}">••••••••</span>
+                                <button type="button" class="btn-reveal" onclick="revealPassword({{ credential.id }})">👁️</button>
+                            </span>
+                        </p>
+                        {% if credential.notes %}
+                            <p><strong>Notes:</strong> {{ credential.notes[:50] }}{% if credential.notes|length > 50 %}...{% endif %}</p>
+                        {% endif %}
+                    </div>
+
+                    <div class="credential-actions">
+                        <a href="{{ url_for('vault.edit_credential', cred_id=credential.id) }}" class="btn btn-secondary btn-sm">Edit</a>
+                        <form method="POST" action="{{ url_for('vault.delete_credential', cred_id=credential.id) }}" class="delete-form" onsubmit="return confirm('Are you sure?');">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty-state">
+            <p>No credentials yet. <a href="{{ url_for('vault.add_credential') }}">Add your first credential</a></p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

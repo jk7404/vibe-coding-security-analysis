@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{{ title or "Vault" }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <a class="brand" href="{{ url_for('vault') }}">Vault</a>
+        <nav class="nav">
+          {% if current_user.is_authenticated %}
+            <span class="muted">{{ current_user.email }}</span>
+            <form class="inline" method="post" action="{{ url_for('logout') }}">
+              {{ csrf_token() }}
+              <button class="btn btn-ghost" type="submit">Sign out</button>
+            </form>
+          {% else %}
+            <a class="btn btn-ghost" href="{{ url_for('login') }}">Sign in</a>
+            <a class="btn" href="{{ url_for('register') }}">Register</a>
+          {% endif %}
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <div class="flash-wrap">
+            {% for category, message in messages %}
+              <div class="flash flash-{{ category }}">{{ message }}</div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+
+      {% block content %}{% endblock %}
+    </main>
+  </body>
+</html>
+

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Search Results - Password Manager{% endblock %}
+
+{% block content %}
+<div class="card">
+    <h2>Search Results</h2>
+
+    <div style="margin: 1.5rem 0;">
+        <form method="GET" action="{{ url_for('search') }}" style="display: flex; gap: 0.5rem;">
+            <input type="text" name="q" value="{{ query }}" placeholder="Search passwords..." style="flex: 1;">
+            <button type="submit" class="btn">Search</button>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Clear</a>
+        </form>
+    </div>
+
+    {% if query %}
+    <p style="margin-bottom: 1rem; color: #666;">
+        Found <strong>{{ passwords|length }}</strong> result{% if passwords|length != 1 %}s{% endif %} for "<strong>{{ query }}</strong>"
+    </p>
+    {% endif %}
+
+    {% if passwords %}
+    <table class="password-table">
+        <thead>
+            <tr>
+                <th>Service</th>
+                <th>Username</th>
+                <th>URL</th>
+                <th>Created</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for pwd in passwords %}
+            <tr>
+                <td><strong>{{ pwd.service }}</strong></td>
+                <td>{{ pwd.username }}</td>
+                <td>
+                    {% if pwd.url %}
+                    <a href="{{ pwd.url }}" target="_blank" rel="noopener noreferrer">{{ pwd.url }}</a>
+                    {% else %}
+                    <span class="text-muted">N/A</span>
+                    {% endif %}
+                </td>
+                <td class="text-muted">{{ pwd.created_at.strftime('%Y-%m-%d %H:%M') }}</td>
+                <td>
+                    <div class="action-buttons">
+                        <a href="{{ url_for('view_password', pwd_id=pwd.id) }}" class="btn btn-secondary">View</a>
+                        <a href="{{ url_for('edit_password', pwd_id=pwd.id) }}" class="btn btn-secondary">Edit</a>
+                        <form method="POST" action="{{ url_for('delete_password', pwd_id=pwd.id) }}" style="display: inline;">
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?');">Delete</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state">
+        <h2>No passwords found</h2>
+        <p>Try a different search term.</p>
+        <a href="{{ url_for('dashboard') }}" class="btn">Back to Dashboard</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

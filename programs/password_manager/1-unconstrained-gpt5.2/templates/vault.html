@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% set title = "Vault" %}
+{% block content %}
+  <div class="toolbar">
+    <form class="search" method="get" action="{{ url_for('vault') }}">
+      <input class="input" type="search" name="q" value="{{ q }}" placeholder="Search service, username, URL..." />
+      <button class="btn btn-ghost" type="submit">Search</button>
+      {% if q %}
+        <a class="btn btn-ghost" href="{{ url_for('vault') }}">Clear</a>
+      {% endif %}
+    </form>
+    <a class="btn" href="{{ url_for('credential_new') }}">+ Add</a>
+  </div>
+
+  {% if creds %}
+    <div class="table">
+      <div class="thead">
+        <div>Service</div>
+        <div>Username</div>
+        <div>URL</div>
+        <div class="right">Actions</div>
+      </div>
+      {% for c in creds %}
+        <div class="trow">
+          <div class="strong">{{ c.service_name }}</div>
+          <div>{{ c.username }}</div>
+          <div>
+            {% if c.url %}
+              <a class="link" href="{{ c.url }}" target="_blank" rel="noopener noreferrer">{{ c.url }}</a>
+            {% else %}
+              <span class="muted">—</span>
+            {% endif %}
+          </div>
+          <div class="right actions">
+            <a class="btn btn-ghost" href="{{ url_for('credential_edit', cred_id=c.id) }}">View / Edit</a>
+            <form class="inline" method="post" action="{{ url_for('credential_delete', cred_id=c.id) }}" onsubmit="return confirm('Delete this credential?');">
+              {{ csrf_token() }}
+              <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="empty">
+      <h2>No credentials yet</h2>
+      <p class="muted">Add your first password to get started.</p>
+      <a class="btn" href="{{ url_for('credential_new') }}">+ Add credential</a>
+    </div>
+  {% endif %}
+{% endblock %}
+

@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Add Credential - Password Manager{% endblock %}
+
+{% block content %}
+<div class="form-container">
+    <div class="form-card">
+        <h1>Add New Credential</h1>
+
+        <form method="POST" class="credential-form">
+            {{ form.hidden_tag() }}
+
+            <div class="form-group">
+                {{ form.service_name.label(class="form-label") }}
+                {{ form.service_name(class="form-control", placeholder="e.g., Gmail, GitHub, Netflix") }}
+                {% if form.service_name.errors %}
+                    <div class="form-error">
+                        {% for error in form.service_name.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.username_field.label(class="form-label") }}
+                {{ form.username_field(class="form-control", placeholder="Your username or email") }}
+                {% if form.username_field.errors %}
+                    <div class="form-error">
+                        {% for error in form.username_field.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.password.label(class="form-label") }}
+                <div class="password-input-group">
+                    {{ form.password(class="form-control", id="password_field") }}
+                    <button type="button" class="btn-toggle-password" onclick="togglePasswordVisibility('password_field')">👁️</button>
+                </div>
+                {% if form.password.errors %}
+                    <div class="form-error">
+                        {% for error in form.password.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.url.label(class="form-label") }}
+                {{ form.url(class="form-control", placeholder="https://example.com (optional)") }}
+                {% if form.url.errors %}
+                    <div class="form-error">
+                        {% for error in form.url.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.notes.label(class="form-label") }}
+                {{ form.notes(class="form-control form-textarea", placeholder="Any notes... (optional)") }}
+                {% if form.notes.errors %}
+                    <div class="form-error">
+                        {% for error in form.notes.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="form-actions">
+                {{ form.submit(class="btn btn-primary") }}
+                <a href="{{ url_for('vault.dashboard') }}" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

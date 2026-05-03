@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% set title = "Reveal" %}
+{% block content %}
+  <div class="card">
+    <div class="row">
+      <h1>Reveal password</h1>
+      <a class="btn btn-secondary" href="{{ url_for('vault') }}">Back</a>
+    </div>
+
+    <div class="kv">
+      <div class="k">Service</div><div class="v mono">{{ cred.service_name }}</div>
+      <div class="k">Username</div><div class="v">{{ cred.account_username }}</div>
+      <div class="k">URL</div>
+      <div class="v">
+        {% if cred.url %}
+          <a href="{{ cred.url }}" rel="noreferrer" target="_blank">{{ cred.url }}</a>
+        {% else %}
+          <span class="muted">—</span>
+        {% endif %}
+      </div>
+      <div class="k">Password</div><div class="v mono">{{ password_plain }}</div>
+    </div>
+
+    <form method="post">
+      {{ form.csrf_token }}
+      <button class="btn btn-secondary" type="submit">Done</button>
+    </form>
+  </div>
+{% endblock %}
+

@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% set title = "Vault" %}
+
+{% block content %}
+  <div class="d-flex flex-wrap gap-2 justify-content-between align-items-center mb-3">
+    <form class="d-flex gap-2" method="get" action="{{ url_for('vault') }}">
+      <input class="form-control" name="q" value="{{ q }}" placeholder="Search (service, username, URL)..." />
+      <button class="btn btn-outline-primary" type="submit">Search</button>
+    </form>
+    <a class="btn btn-primary" href="{{ url_for('credential_new') }}">+ New</a>
+  </div>
+
+  {% if not creds %}
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="text-secondary">No saved credentials yet.</div>
+      </div>
+    </div>
+  {% else %}
+    <div class="card shadow-sm">
+      <div class="table-responsive">
+        <table class="table mb-0 align-middle">
+          <thead class="table-light">
+            <tr>
+              <th>Service</th>
+              <th>Username</th>
+              <th>URL</th>
+              <th>Password</th>
+              <th class="text-end">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for c in creds %}
+              <tr>
+                <td class="fw-semibold">{{ c.service_name }}</td>
+                <td>{{ c.login_username }}</td>
+                <td>
+                  {% if c.url %}
+                    <a href="{{ c.url }}" target="_blank" rel="noopener noreferrer">{{ c.url }}</a>
+                  {% else %}
+                    <span class="text-secondary">—</span>
+                  {% endif %}
+                </td>
+                <td>
+                  <span class="mono">••••••••</span>
+                  <button class="btn btn-sm btn-outline-secondary ms-2" type="button" data-reveal="{{ c.id }}">Reveal</button>
+                  <button class="btn btn-sm btn-outline-secondary ms-1" type="button" data-copy="{{ c.id }}">Copy</button>
+                </td>
+                <td class="text-end">
+                  <a class="btn btn-sm btn-outline-primary" href="{{ url_for('credential_edit', cred_id=c.id) }}">Edit</a>
+                  <form method="post" action="{{ url_for('credential_delete', cred_id=c.id) }}" class="d-inline">
+                    <input type="hidden" name="csrf_token" value="{{ g.csrf_token }}" />
+                    <button class="btn btn-sm btn-outline-danger" type="submit" onclick="return confirm('Delete this entry?')">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {% endif %}
+
+  <div class="modal fade" id="revealModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Password</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="mono" id="revealText">Loading...</div>
+          <div class="text-secondary small mt-2">Avoid sharing your screen while revealing passwords.</div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    async function fetchPassword(id) {
+      const res = await fetch(`/credential/${id}/reveal`, { headers: { "Accept": "application/json" } });
+      if (!res.ok) throw new Error("reveal_failed");
+      return await res.json();
+    }
+
+    document.addEventListener("click", async (ev) => {
+      const revealBtn = ev.target.closest("[data-reveal]");
+      if (revealBtn) {
+        const id = revealBtn.getAttribute("data-reveal");
+        const modalEl = document.getElementById("revealModal");
+        const revealText = document.getElementById("revealText");
+        revealText.textContent = "Loading...";
+        const modal = new bootstrap.Modal(modalEl);
+        modal.show();
+        try {
+          const data = await fetchPassword(id);
+          revealText.textContent = data.password;
+        } catch {
+          revealText.textContent = "Unable to reveal (please log in again).";
+        }
+        return;
+      }
+
+      const copyBtn = ev.target.closest("[data-copy]");
+      if (copyBtn) {
+        const id = copyBtn.getAttribute("data-copy");
+        try {
+          const data = await fetchPassword(id);
+          await navigator.clipboard.writeText(data.password);
+          copyBtn.textContent = "Copied";
+          setTimeout(() => copyBtn.textContent = "Copy", 1200);
+        } catch {
+          copyBtn.textContent = "Failed";
+          setTimeout(() => copyBtn.textContent = "Copy", 1200);
+        }
+      }
+    });
+  </script>
+{% endblock %}
+
