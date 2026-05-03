@@ -1,0 +1,3 @@
+"Flask app is run in debug mode","Running a Flask app in debug mode may allow an attacker to run arbitrary code through the Werkzeug debugger.","error","A Flask app appears to be run in debug mode. This may allow an attacker to run arbitrary code through the debugger.","/app.py","65","5","65","23"
+"Uncontrolled data used in path expression","Accessing paths influenced by users can allow an attacker to access unexpected resources.","error","This path depends on a [[""user-provided value""|""relative:///app.py:2:43:2:49""]].","/app.py","33","27","33","35"
+"Unused import","Import is not required as it is not used","recommendation","Import of 'Response' is not used.","/app.py","2","1","2","59"
