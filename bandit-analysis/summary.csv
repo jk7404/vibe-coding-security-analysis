@@ -7,3 +7,6 @@ password_manager,vibe,2,1,0,1
 password_manager,cot,1,1,0,0
 password_manager,pns,2,0,0,2
 password_manager,tdd,11,1,0,10
+server_log_manager,gemma4,2,2,0,0
+server_log_manager,gpt5,3,1,0,2
+server_log_manager,haiku,3,0,0,3

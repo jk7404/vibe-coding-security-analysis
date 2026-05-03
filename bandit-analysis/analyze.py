@@ -10,6 +10,9 @@ files = {
     ("password_manager", "cot"):  "results_pm_cot.json",
     ("password_manager", "pns"):  "results_pm_pns.json",
     ("password_manager", "tdd"):  "results_pm_tdd.json",
+    ("server_log_manager", "gemma4"): "results_slm_gemma4.json",
+    ("server_log_manager", "gpt5"):   "results_slm_gpt5.json",
+    ("server_log_manager", "haiku"):  "results_slm_haiku.json",
 }
 
 rows = []

@@ -28,3 +28,11 @@ password_manager,tdd,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. T
 password_manager,tdd,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'password',43
 password_manager,tdd,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'password',44
 password_manager,tdd,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,51
+server_log_manager,gemma4,app.py,HIGH,HIGH,B605,start_process_with_a_shell,"Starting a process with a shell, possible injection detected, security issue.",46
+server_log_manager,gemma4,app.py,HIGH,MEDIUM,B201,flask_debug_true,"A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",65
+server_log_manager,gpt5,app.py,LOW,HIGH,B404,blacklist,Consider possible security implications associated with the subprocess module.,3
+server_log_manager,gpt5,app.py,LOW,HIGH,B603,subprocess_without_shell_equals_true,subprocess call - check for execution of untrusted input.,134
+server_log_manager,gpt5,app.py,HIGH,MEDIUM,B201,flask_debug_true,"A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",172
+server_log_manager,haiku,log_viewer.py,LOW,HIGH,B404,blacklist,Consider possible security implications associated with the subprocess module.,3
+server_log_manager,haiku,log_viewer.py,LOW,HIGH,B607,start_process_with_partial_path,Starting a process with a partial executable path,201
+server_log_manager,haiku,log_viewer.py,LOW,HIGH,B603,subprocess_without_shell_equals_true,subprocess call - check for execution of untrusted input.,201

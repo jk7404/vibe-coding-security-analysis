@@ -2,14 +2,17 @@ import json
 import pandas as pd
 
 files = {
-    ("uploader", "vibe"):         "results_uploader_vibe.json",
-    ("uploader", "cot"):          "results_uploader_cot.json",
-    ("uploader", "pns"):          "results_uploader_pns.json",
-    ("uploader", "tdd"):          "results_uploader_tdd.json",
-    ("password_manager", "vibe"): "results_pm_vibe.json",
-    ("password_manager", "cot"):  "results_pm_cot.json",
-    ("password_manager", "pns"):  "results_pm_pns.json",
-    ("password_manager", "tdd"):  "results_pm_tdd.json",
+    ("uploader", "vibe"):              "results_uploader_vibe.json",
+    ("uploader", "cot"):               "results_uploader_cot.json",
+    ("uploader", "pns"):               "results_uploader_pns.json",
+    ("uploader", "tdd"):               "results_uploader_tdd.json",
+    ("password_manager", "vibe"):      "results_pm_vibe.json",
+    ("password_manager", "cot"):       "results_pm_cot.json",
+    ("password_manager", "pns"):       "results_pm_pns.json",
+    ("password_manager", "tdd"):       "results_pm_tdd.json",
+    ("server_log_manager", "gemma4"):  "results_slm_gemma4.json",
+    ("server_log_manager", "gpt5"):    "results_slm_gpt5.json",
+    ("server_log_manager", "haiku"):   "results_slm_haiku.json",
 }
 
 rows = []
