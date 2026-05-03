@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>View Upload</title>
+    <style>
+      body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; max-width: 820px; margin: 40px auto; padding: 0 16px; }
+      .card { border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px; }
+      img { max-width: 100%; height: auto; border-radius: 12px; display: block; }
+      .row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+      a { color: #2563eb; text-decoration: none; }
+      a:hover { text-decoration: underline; }
+      code { background: #f3f4f6; padding: 2px 6px; border-radius: 6px; }
+    </style>
+  </head>
+  <body>
+    <h1>Uploaded image</h1>
+    <div class="card">
+      <p class="row">
+        <span>Filename:</span>
+        <code>{{ filename }}</code>
+        <span>·</span>
+        <a href="{{ url_for('images', filename=filename) }}">Open raw image</a>
+        <span>·</span>
+        <a href="{{ url_for('upload') }}">Upload another</a>
+      </p>
+      <img src="{{ url_for('images', filename=filename) }}" alt="Uploaded image {{ filename }}" />
+    </div>
+  </body>
+</html>
+
