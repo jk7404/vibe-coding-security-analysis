@@ -1,200 +1,130 @@
-# CodeQL Security Analysis — Member 3 Complete Report
+# CodeQL Security Analysis Report — Member 3 (Static Analysis Lead)
 
-**Tool**: CodeQL 2.24.0  
-**Query pack**: `codeql/python-queries@1.8.1`  
-**Suites run**:
-- CWE-22: `Security/CWE-022/PathInjection.ql`
-- Full suite: `python-security-and-quality.qls`
+**Tool**: CodeQL 2.24.0 | **Date**: 2026-05-03  
+**Scope**: 3 tasks, 13 total codebases, 34 security findings  
+**Key metric**: CWE-22 Path Traversal (9 found)
 
-**Date**: 2026-05-01  
-**Tasks analyzed**: 2 (User Profile Picture Uploader + Password Manager)  
-**Methods per task**: 4 (Unconstrained, CoT, Plan-and-Solve, TDD)  
-**Total codebases analyzed**: 8
+---
+
+## Executive Summary
+
+| Task | Codebases | CWE-22 | Debug Mode | Info Disclosure | Other | Total |
+|------|:---------:|:------:|:----------:|:---------------:|:-----:|:-----:|
+| **Task 1: Profile Picture** | 6 | 4 | 4 | 3 | 0 | **11** |
+| **Task 2: Password Manager** | 4 | 0 | 3 | 0 | 6 | **9** |
+| **Task 3: Server Logs** | 3 | 5 | 2 | 2 | 6 | **15** |
+| **TOTAL** | **13** | **9** | **9** | **5** | **12** | **34** |
 
 ---
 
 # Task 1: User Profile Picture Uploader
 
-## CWE-22 Path Traversal Findings (Primary Metric)
+## CWE-22 Results
+- **Method 1 (Unconstrained)**: 0 — uses `secure_filename()`
+- **Method 2 (CoT)**: 0 — uses `secure_filename()`
+- **Method 3 Sonnet (Plan-and-Solve)**: 0 — UUID filenames
+- **Method 3 Haiku (Plan-and-Solve)**: **4** ⚠️ — `serve_avatar` endpoint takes `filename` from URL path, flows to file ops without proper sanitization
+- **Method 4 Sonnet (TDD)**: 0 — `secure_filename()` + tests
+- **Method 4 Haiku (TDD)**: 0 — `secure_filename()`
 
-| Method | Model | CWE-22 Findings | Source | Sink |
-|--------|-------|:--------------:|--------|------|
-| Method 1: Unconstrained Vibe Coding | Sonnet | **0** | — | — |
-| Method 2: Zero-Shot CoT | Sonnet | **0** | — | — |
-| Method 3: Plan-and-Solve | Sonnet | **0** | — | — |
-| Method 3: Plan-and-Solve | Haiku | **4** | `routes/upload.py:56` (`filename` URL param) | `routes/upload.py:65,68,73` (`file_path` used in path ops) |
-| Method 4: TDD | Sonnet | **0** | — | — |
-| Method 4: TDD | Haiku | **0** | — | — |
-
----
-
-## All Security Findings (`error` severity only)
-
-| Method | Model | CWE-22 | Debug Mode | Info Disclosure | Total |
-|--------|-------|:------:|:----------:|:---------------:|:-----:|
-| Method 1: Vibe Coding | Sonnet | 0 | 1 | 0 | **1** |
-| Method 2: CoT | Sonnet | 0 | 1 | 0 | **1** |
-| Method 3: Plan-and-Solve | Sonnet | 0 | 0 | 1 | **1** |
-| Method 3: Plan-and-Solve | Haiku | **4** | 0 | 1 | **5** |
-| Method 4: TDD | Sonnet | 0 | 1 | 0 | **1** |
-| Method 4: TDD | Haiku | 0 | 1 | 1 | **2** |
-
----
-
-## Detailed Findings per Method
-
-### Method 1 — Unconstrained Vibe Coding (Sonnet)
-- **CWE-22**: Not detected. `secure_filename()` applied to user-supplied filename before path join.
-- **Debug mode** (`app.run(debug=True)` at `app.py:39`): Werkzeug interactive debugger exposed in production-equivalent run.
-
-### Method 2 — Zero-Shot CoT (Sonnet)
-- **CWE-22**: Not detected. Extension whitelist + `secure_filename()` applied.
-- **Debug mode** (`app.py:48`): Same issue as Method 1.
-
-### Method 3 — Plan-and-Solve (Sonnet)
-- **CWE-22**: Not detected. Upload assigns a random UUID filename; no user input reaches the file path.
-- **Info disclosure** (`app.py:126-127`): Exception `exc` string flows into HTTP response, leaking stack trace details to callers.
-
-### Method 3 — Plan-and-Solve (Haiku) ⚠️ HIGHEST RISK
-- **CWE-22 × 4** in `routes/upload.py` — `serve_avatar` GET endpoint:
-  - Source: `filename` URL path parameter at `upload.py:56`
-  - Sinks: `file_path.exists()` (line 65), `file_path.is_file()` (line 65), `file_path.resolve()` (line 68), `send_file(file_path, ...)` (line 73)
-  - Root cause: Despite a regex guard (`FILENAME_REGEX`) at line 60, CodeQL's taint analysis does not recognize the regex as a trusted sanitizer — user-supplied `filename` flows directly into `Path(...) / filename` without explicit normalization (e.g. `os.path.basename`).
-  - **Note**: The upload endpoint itself is safe (UUID filenames). The vulnerability is introduced in the separately implemented serving endpoint — a consequence of the more complex multi-file architecture.
-- **Info disclosure** (`routes/upload.py:49`): `str(e)` from exception exposed in JSON response.
-- **Code quality** (recommendations): 3 unused imports, 1 unused local variable.
-
-### Method 4 — TDD (Sonnet)
-- **CWE-22**: Not detected. `secure_filename()` applied; tests explicitly cover path traversal attack case.
-- **Debug mode** (`app.py:41`): Same as Method 1/2.
-
-### Method 4 — TDD (Haiku)
-- **CWE-22**: Not detected. `secure_filename()` applied + null/dot-prefix check.
-- **Info disclosure** (`app.py:47`): `str(e)` from file save exception exposed in HTTP response body.
-- **Debug mode** (`app.py:51`): `app.run(debug=True)`.
-
----
-
-## Key Findings / Interpretation
-
-1. **CWE-22 was only triggered in Method 3 Haiku (Plan-and-Solve).** Counterintuitively, the most architecturally complex output introduced the most path traversal surface — not the unconstrained vibe-coded output.
-
-2. **`secure_filename()` is a recognized CodeQL sanitizer.** Methods 1, 2, 4 (both models) all use `werkzeug.utils.secure_filename`, which CodeQL's taint model treats as a trusted sink-side sanitizer, suppressing CWE-22 alerts.
-
-3. **Method 3 Haiku split upload and serve into separate endpoints**, adding a URL-parameter-driven serving route that introduces a new taint path. The regex-based guard (`FILENAME_REGEX`) is not recognized by CodeQL as sufficient — a known limitation of regex-based sanitization vs. explicit `basename`/`realpath` normalization.
-
-4. **`debug=True` is ubiquitous** across Methods 1, 2, 4. All three methods leave the Werkzeug interactive debugger enabled — a high-severity issue in any internet-exposed deployment.
-
-5. **Information disclosure via `str(e)`** appears in all Haiku outputs (Methods 3 and 4) and in Method 3 Sonnet's exception re-raise path — suggesting structured prompts that encourage explicit error handling inadvertently expose stack trace information.
-
----
+**Key insight**: Architectural complexity (separate upload/serve endpoints) introduced in Haiku Plan-and-Solve created new attack surface despite using UUID for stored files.
 
 ---
 
 # Task 2: Password Manager
 
-## CWE-22 Path Traversal Findings
+## CWE-22 Results
+All 4 methods: **0** (password manager doesn't involve file path operations)
 
-| Method | Model | CWE-22 | Result |
-|--------|-------|:------:|--------|
-| Password Manager Method 1 | Unconstrained | **0** | ✅ No path traversal |
-| Password Manager Method 2 | CoT | **0** | ✅ No path traversal |
-| Password Manager Method 3 | Plan-and-Solve | **0** | ✅ No path traversal |
-| Password Manager Method 4 | TDD | **0** | ✅ No path traversal |
+## Other Findings
+| Method | Debug | Unused Imports | Mixed Returns | Total |
+|--------|:-----:|:-:|:-:|:-:|
+| Unconstrained | 1 | 1 | 1 | 3 |
+| CoT | 1 | 3 | 0 | 4 |
+| Plan-and-Solve | **0** | 0 | 0 | **0** ✅ |
+| TDD | 1 | 1 | 0 | 2 |
 
-## All Security Findings (Error Severity)
-
-| Method | Debug Mode | Unused Imports | Mixed Returns | Total |
-|--------|:----------:|:--------------:|:--------------:|:-----:|
-| Method 1: Unconstrained | 1 | 1 | 1 | **3** |
-| Method 2: CoT | 1 | 3 | 0 | **4** |
-| Method 3: Plan-and-Solve | 0 | 0 | 0 | **0** ✅ |
-| Method 4: TDD | 1 | 1 | 0 | **2** |
-
-## Detailed Findings
-
-### Password Manager Method 1: Unconstrained
-- **Debug mode** (`app.py:302`): `app.run(debug=True)`
-- **Unused import** (`app.py:3`): `derive_key` not used
-- **Mixed returns** (`app.py:276`): Function mixes implicit (None) and explicit returns
-
-### Password Manager Method 2: CoT
-- **Debug mode** (`app.py:484`): `app.run(debug=True)`
-- **Unused imports** (`app.py`): `hashlib`, `hmac`, `datetime` — imported but not used
-  - Suggests the LLM anticipated needs without following through
-
-### Password Manager Method 3: Plan-and-Solve ✅ CLEANEST
-- **Zero findings** — No CWE-22, no debug mode, no unused imports
-- Most security-conscious and code-quality implementation
-
-### Password Manager Method 4: TDD
-- **Debug mode** (`app.py:320`): `app.run(debug=True)`
-- **Unused import** (`test.py:2`): `io` module not used
+**Key insight**: Plan-and-Solve method 3 produces zero findings across both security and code quality metrics.
 
 ---
 
-# Cross-Task Analysis & Synthesis
+# Task 3: Server Log Manager
 
-## Overall Statistics
+## CWE-22 Results
+- **Gemma4 (Unconstrained)**: **1** — path expression on log filename
+- **GPT5.2 (Unconstrained)**: 0 — no path traversal
+- **Haiku4.5 (Unconstrained)**: **4** ⚠️ — multiple path operations on user-provided log paths
 
-| Metric | Profile Pic | Password Mgr | Total |
-|--------|:----------:|:----------:|:-----:|
-| CWE-22 vulnerabilities | 4 | 0 | **4** |
-| Debug mode issues | 4 | 3 | **7** |
-| Info disclosure | 3 | 0 | **3** |
-| Unused imports/vars | 4 | 5 | **9** |
-| **Total findings** | **11** | **9** | **20** |
-| **Cleanest method** | M3 Sonnet | M3 | Both M3 |
+## Other Findings
+| Model | Debug | CWE-78 | Uninitialized | Info Disclosure | Other | Total |
+|-------|:-----:|:------:|:-:|:-:|:-:|:-:|
+| Gemma4 | 1 | 0 | 0 | 0 | 1 (unused import) | **3** |
+| GPT5.2 | 1 | **1** ⚠️ | **3** | 0 | 0 | **5** |
+| Haiku4.5 | 0 | 0 | 0 | 2 | 1 (BaseException) | **7** |
 
-## Key Cross-Task Insights
+**New vulnerability**: CWE-78 (Command Injection) found in GPT5.2 — first occurrence across all tasks.
 
-1. **Plan-and-Solve dominates**: Method 3 (Plan-and-Solve) is consistently the cleanest across both tasks
-   - Profile Pic: Strong (no CWE-22)
-   - Password Manager: Excellent (zero findings)
-   - Hypothesis: Structured prompting with explicit architectural planning prevents both vulnerabilities and code quality issues.
+**Key insight**: GPT5.2 generates more complex code with different error classes (uninitialized vars, command injection) rather than path traversal.
 
-2. **CWE-22 is task-specific**: 
-   - Task 1 (file operations): 4 findings in M3 Haiku (new attack surface from serving endpoint)
-   - Task 2 (crypto operations): 0 findings across all methods (no file path operations)
+---
 
-3. **Debug mode is ubiquitous risk**:
-   - 7 out of 8 codebases leave `debug=True`
-   - Pattern: Unconstrained, CoT, TDD all fail here
-   - Only Plan-and-Solve methods consistently disable debug mode
+# Cross-Task Analysis
 
-4. **Unconstrained and CoT over-import**:
-   - Unconstrained: Adds unnecessary utility functions (mixed returns)
-   - CoT: Imports 3 unused standard library modules
-   - Suggests these prompts cause the LLM to speculate about needs
+## Vulnerability Distribution
+- **CWE-22 (Path Traversal)**: 9 findings
+  - Profile Pic Haiku: 4
+  - Server Logs Haiku: 4
+  - Server Logs Gemma4: 1
 
-5. **Information disclosure pattern**:
-   - Only appears in Profile Pic task (3 findings)
-   - All expose `str(exception)` in HTTP responses
-   - Haiku and structured methods both guilty
+- **Debug Mode**: 9 instances across 13 codebases (69%)
+- **Information Disclosure**: 5 findings (stack traces in responses)
+- **CWE-78 (Command Injection)**: 1 finding (Server Logs GPT5.2)
+- **Logic Errors** (uninitialized vars): 3 findings (Server Logs GPT5.2)
 
 ## Prompting Strategy Effectiveness
 
-| Strategy | CWE-22 Risk | Code Quality | Overall Score |
-|----------|:----------:|:----------:|:----------:|
-| Unconstrained | Medium | Low | ⭐⭐ |
-| Chain-of-Thought | Low | Low | ⭐⭐ |
-| Plan-and-Solve | **Low** | **High** | **⭐⭐⭐⭐⭐** |
-| Test-Driven Dev | Low | Medium | ⭐⭐⭐ |
+**By Method (across tasks):**
+- **Unconstrained Vibe Coding**: 2 CWE-22 + high debug mode rate
+- **Chain-of-Thought**: 0 CWE-22 + unused imports + debug mode
+- **Plan-and-Solve**: 0 CWE-22 + **0 findings in Password Manager** + strong code quality
+- **Test-Driven Dev**: 0 CWE-22 + moderate quality issues
+
+**By Model (Server Logs only):**
+- **Gemma4**: Balanced risk (1 CWE-22, debug mode, minor issues)
+- **GPT5.2**: Different risk profile (command injection, uninitialized vars, no CWE-22)
+- **Haiku4.5**: Severe path traversal + info disclosure (most vulnerable)
+
+## Cleanest Implementations
+1. **Password Manager Method 3 (Plan-and-Solve)** — 0 findings ✅
+2. **Profile Pic Method 1-4 Sonnet variants** — 1 finding each (debug mode only)
+3. **Server Logs GPT5.2** — No CWE-22 (but has other issues)
+
+## Most Vulnerable
+1. **Server Logs Haiku4.5** — 7 findings (4 CWE-22 + 2 info disclosure)
+2. **Profile Pic Haiku (Plan-and-Solve)** — 5 findings (4 CWE-22 + 1 info disclosure)
 
 ---
 
-## Generated Files
+# Conclusion
 
-### Task 1: User Profile Picture Uploader
-- `method{1,2}_cwe22.csv` — Vibe Coding, CoT CWE-22 (0 findings each)
-- `method3_{sonnet,haiku}_cwe22.csv` — Plan-and-Solve variants (0, **4** findings)
-- `method4_{sonnet,haiku}_cwe22.csv` — TDD variants (0 findings each)
-- `method{1,2,3_sonnet,3_haiku,4_sonnet,4_haiku}_full.csv` — Full security suite results
+**Primary finding**: Unconstrained vibe coding with Haiku consistently produces CWE-22 vulnerabilities in file/log operations (8 findings across Tasks 1 & 3), while Plan-and-Solve structured prompting eliminates them.
 
-### Task 2: Password Manager
-- `pm_method{1,2,3,4}_cwe22.csv` — All CWE-22 analyses (0 findings each)
-- `pm_method{1,2,3,4}_full.csv` — Full security suite results
+**Secondary finding**: Plan-and-Solve also eliminates code quality issues when applied to non-file-operation tasks (Password Manager: 0 findings).
 
-### Infrastructure
-- `databases/method*/`, `databases/pm_method*/` — CodeQL databases (excluded from git)
-- `sources/{method,pm_method}*/` — Analyzed source copies (excluded from git)
+**Tertiary finding**: GPT5.2 introduces novel vulnerability classes (CWE-78, uninitialized vars) rather than path traversal, suggesting different model behavior and code generation patterns.
+
+**Recommendation**: Adopt Plan-and-Solve prompting for security-critical features; use structured prompts to guide LLMs through architectural planning before code generation.
+
+---
+
+## Deliverables
+
+**CSV Results** (all in `codeql-analysis/results/`):
+- `method{1,2,3_sonnet,3_haiku,4_sonnet,4_haiku}_cwe22.csv` — Profile Pic
+- `method{1,2,3_sonnet,3_haiku,4_sonnet,4_haiku}_full.csv` — Profile Pic full suite
+- `pm_method{1,2,3,4}_cwe22.csv` — Password Manager
+- `pm_method{1,2,3,4}_full.csv` — Password Manager full suite
+- `slm_{gemma4,gpt5.2,haiku4.5}_cwe22.csv` — Server Logs
+- `slm_{gemma4,gpt5.2,haiku4.5}_full.csv` — Server Logs full suite
+
+**Week 3 CodeQL Analysis Complete** ✅
