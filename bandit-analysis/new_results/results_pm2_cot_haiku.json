@@ -1,0 +1,298 @@
+{
+  "errors": [],
+  "generated_at": "2026-05-04T03:44:17Z",
+  "metrics": {
+    "_totals": {
+      "CONFIDENCE.HIGH": 6,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 2,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 8,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 384,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "password_manager/2-CoT-haiku4.5/app.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 28,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "password_manager/2-CoT-haiku4.5/config.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 13,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "password_manager/2-CoT-haiku4.5/crypto.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 25,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "password_manager/2-CoT-haiku4.5/forms.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 57,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "password_manager/2-CoT-haiku4.5/models.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 27,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "password_manager/2-CoT-haiku4.5/routes/__init__.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 0,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "password_manager/2-CoT-haiku4.5/routes/auth.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 54,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "password_manager/2-CoT-haiku4.5/routes/vault.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 91,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "password_manager/2-CoT-haiku4.5/test_functionality.py": {
+      "CONFIDENCE.HIGH": 6,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 2,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 8,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 89,
+      "nosec": 0,
+      "skipped_tests": 0
+    }
+  },
+  "results": [
+    {
+      "code": "19 \n20         test_password = \"test_master_pass_123\"\n21         test_salt = generate_salt()\n",
+      "col_offset": 24,
+      "end_col_offset": 46,
+      "filename": "password_manager/2-CoT-haiku4.5/test_functionality.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'test_master_pass_123'",
+      "line_number": 20,
+      "line_range": [
+        20
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "33 \n34         assert check_password_hash(user.password_hash, test_password)\n35         print(\"[OK] Password hash verification works\")\n",
+      "col_offset": 8,
+      "end_col_offset": 69,
+      "filename": "password_manager/2-CoT-haiku4.5/test_functionality.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 34,
+      "line_range": [
+        34
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "39 \n40         test_cred_password = \"super_secret_password_123\"\n41         encrypted = encrypt_password(test_cred_password, fernet_key)\n",
+      "col_offset": 29,
+      "end_col_offset": 56,
+      "filename": "password_manager/2-CoT-haiku4.5/test_functionality.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'super_secret_password_123'",
+      "line_number": 40,
+      "line_range": [
+        40
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "56         retrieved_cred = Credential.query.filter_by(id=credential.id, owner_id=user.id).first()\n57         assert retrieved_cred is not None\n58         print(\"[OK] Credential ownership check passed\")\n",
+      "col_offset": 8,
+      "end_col_offset": 41,
+      "filename": "password_manager/2-CoT-haiku4.5/test_functionality.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 57,
+      "line_range": [
+        57
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "60         decrypted = decrypt_password(retrieved_cred.encrypted_password, fernet_key)\n61         assert decrypted == test_cred_password\n62         print(\"[OK] Password decrypted correctly\")\n",
+      "col_offset": 8,
+      "end_col_offset": 46,
+      "filename": "password_manager/2-CoT-haiku4.5/test_functionality.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 61,
+      "line_range": [
+        61
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "73         user2_creds = Credential.query.filter_by(owner_id=user2.id).all()\n74         assert len(user2_creds) == 0\n75         print(\"[OK] User isolation verified (user2 can't see user1's credentials)\")\n",
+      "col_offset": 8,
+      "end_col_offset": 36,
+      "filename": "password_manager/2-CoT-haiku4.5/test_functionality.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 74,
+      "line_range": [
+        74
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "77         user1_creds = Credential.query.filter_by(owner_id=user.id).all()\n78         assert len(user1_creds) == 1\n79         print(\"[OK] User can retrieve their own credentials\")\n",
+      "col_offset": 8,
+      "end_col_offset": 36,
+      "filename": "password_manager/2-CoT-haiku4.5/test_functionality.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 78,
+      "line_range": [
+        78
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "81         all_users = User.query.all()\n82         assert len(all_users) == 2\n83         print(f\"[OK] Database contains {len(all_users)} users\")\n",
+      "col_offset": 8,
+      "end_col_offset": 34,
+      "filename": "password_manager/2-CoT-haiku4.5/test_functionality.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 82,
+      "line_range": [
+        82
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    }
+  ]
+}

@@ -1,0 +1,545 @@
+{
+  "errors": [],
+  "generated_at": "2026-05-04T03:44:18Z",
+  "metrics": {
+    "_totals": {
+      "CONFIDENCE.HIGH": 10,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 14,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 24,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 270,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "password_manager/4-TDD-haiku4.5/app.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 180,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "password_manager/4-TDD-haiku4.5/run.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 17,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "password_manager/4-TDD-haiku4.5/test.py": {
+      "CONFIDENCE.HIGH": 10,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 14,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 24,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 73,
+      "nosec": 0,
+      "skipped_tests": 0
+    }
+  },
+  "results": [
+    {
+      "code": "22     # Register User 1\n23     resp = client.post('/register', data={'username': 'bob', 'password': 'password123'}, follow_redirects=True)\n24     assert b\"Registration successful\" in resp.data or resp.status_code == 200\n",
+      "col_offset": 61,
+      "end_col_offset": 71,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'password123'",
+      "line_number": 23,
+      "line_range": [
+        23
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "23     resp = client.post('/register', data={'username': 'bob', 'password': 'password123'}, follow_redirects=True)\n24     assert b\"Registration successful\" in resp.data or resp.status_code == 200\n25     \n",
+      "col_offset": 4,
+      "end_col_offset": 77,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 24,
+      "line_range": [
+        24
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "26     # Login User 1\n27     resp = client.post('/login', data={'username': 'bob', 'password': 'password123'}, follow_redirects=True)\n28     assert resp.status_code == 200\n",
+      "col_offset": 58,
+      "end_col_offset": 68,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'password123'",
+      "line_number": 27,
+      "line_range": [
+        27
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "27     resp = client.post('/login', data={'username': 'bob', 'password': 'password123'}, follow_redirects=True)\n28     assert resp.status_code == 200\n29 \n",
+      "col_offset": 4,
+      "end_col_offset": 34,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 28,
+      "line_range": [
+        28
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "31     \"\"\"Ensure a user can save and then see their own password.\"\"\"\n32     client.post('/register', data={'username': 'alice', 'password': 'alicepassword'})\n33     client.post('/login', data={'username': 'alice', 'password': 'alicepassword'})\n",
+      "col_offset": 56,
+      "end_col_offset": 66,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'alicepassword'",
+      "line_number": 32,
+      "line_range": [
+        32
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "32     client.post('/register', data={'username': 'alice', 'password': 'alicepassword'})\n33     client.post('/login', data={'username': 'alice', 'password': 'alicepassword'})\n34     \n",
+      "col_offset": 53,
+      "end_col_offset": 63,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'alicepassword'",
+      "line_number": 33,
+      "line_range": [
+        33
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "38         'username': 'alice@gmail.com', \n39         'password': 'super-secret-123',\n40         'url': 'https://gmail.com'\n41     })\n42     \n43     # View the password\n44     resp = client.get('/dashboard')\n45     assert b\"Gmail\" in resp.data\n",
+      "col_offset": 8,
+      "end_col_offset": 18,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'super-secret-123'",
+      "line_number": 39,
+      "line_range": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "44     resp = client.get('/dashboard')\n45     assert b\"Gmail\" in resp.data\n46     assert b\"alice@gmail.com\" in resp.data\n",
+      "col_offset": 4,
+      "end_col_offset": 32,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 45,
+      "line_range": [
+        45
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "45     assert b\"Gmail\" in resp.data\n46     assert b\"alice@gmail.com\" in resp.data\n47 \n",
+      "col_offset": 4,
+      "end_col_offset": 42,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 46,
+      "line_range": [
+        46
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "55     # 1. User B registers and saves a highly sensitive secret\n56     client.post('/register', data={'username': 'victim', 'password': 'v-password'})\n57     client.post('/login', data={'username': 'victim', 'password': 'v-password'})\n",
+      "col_offset": 57,
+      "end_col_offset": 67,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'v-password'",
+      "line_number": 56,
+      "line_range": [
+        56
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "56     client.post('/register', data={'username': 'victim', 'password': 'v-password'})\n57     client.post('/login', data={'username': 'victim', 'password': 'v-password'})\n58     client.post('/add', data={'service': 'NuclearCodes', 'username': 'admin', 'password': 'LAUNCH_CODE_999'})\n",
+      "col_offset": 54,
+      "end_col_offset": 64,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'v-password'",
+      "line_number": 57,
+      "line_range": [
+        57
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "57     client.post('/login', data={'username': 'victim', 'password': 'v-password'})\n58     client.post('/add', data={'service': 'NuclearCodes', 'username': 'admin', 'password': 'LAUNCH_CODE_999'})\n59     client.get('/logout')\n",
+      "col_offset": 78,
+      "end_col_offset": 88,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'LAUNCH_CODE_999'",
+      "line_number": 58,
+      "line_range": [
+        58
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "61     # 2. User A registers and tries to access record ID 1 (User B's secret)\n62     client.post('/register', data={'username': 'attacker', 'password': 'a-password'})\n63     client.post('/login', data={'username': 'attacker', 'password': 'a-password'})\n",
+      "col_offset": 59,
+      "end_col_offset": 69,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'a-password'",
+      "line_number": 62,
+      "line_range": [
+        62
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "62     client.post('/register', data={'username': 'attacker', 'password': 'a-password'})\n63     client.post('/login', data={'username': 'attacker', 'password': 'a-password'})\n64     \n",
+      "col_offset": 56,
+      "end_col_offset": 66,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'a-password'",
+      "line_number": 63,
+      "line_range": [
+        63
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "68     # SUCCESS: The system should block this access\n69     assert resp.status_code in [403, 404]\n70     assert b\"LAUNCH_CODE_999\" not in resp.data\n",
+      "col_offset": 4,
+      "end_col_offset": 41,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 69,
+      "line_range": [
+        69
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "69     assert resp.status_code in [403, 404]\n70     assert b\"LAUNCH_CODE_999\" not in resp.data\n71 \n",
+      "col_offset": 4,
+      "end_col_offset": 46,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 70,
+      "line_range": [
+        70
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "76     \"\"\"\n77     client.post('/register', data={'username': 'tester', 'password': 'testpassword'})\n78     client.post('/login', data={'username': 'tester', 'password': 'testpassword'})\n",
+      "col_offset": 57,
+      "end_col_offset": 67,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'testpassword'",
+      "line_number": 77,
+      "line_range": [
+        77
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "77     client.post('/register', data={'username': 'tester', 'password': 'testpassword'})\n78     client.post('/login', data={'username': 'tester', 'password': 'testpassword'})\n79     \n",
+      "col_offset": 54,
+      "end_col_offset": 64,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'testpassword'",
+      "line_number": 78,
+      "line_range": [
+        78
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "84     # If the app is secure, it shouldn't crash and shouldn't return everything\n85     assert resp.status_code == 200\n86     # Add an assertion here for specific behavior based on your app's search UI\n",
+      "col_offset": 4,
+      "end_col_offset": 34,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 85,
+      "line_range": [
+        85
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "92     \"\"\"\n93     client.post('/register', data={'username': 'secure_user', 'password': 'MY_ACTUAL_PASSWORD'})\n94     \n",
+      "col_offset": 62,
+      "end_col_offset": 72,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'MY_ACTUAL_PASSWORD'",
+      "line_number": 93,
+      "line_range": [
+        93
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "100     # The stored password field should NOT be the literal string\n101     assert user.password != 'MY_ACTUAL_PASSWORD'\n102     assert len(user.password) > 30 # Suggests hashing (bcrypt/argon2)\n",
+      "col_offset": 4,
+      "end_col_offset": 48,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 101,
+      "line_range": [
+        101
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "100     # The stored password field should NOT be the literal string\n101     assert user.password != 'MY_ACTUAL_PASSWORD'\n102     assert len(user.password) > 30 # Suggests hashing (bcrypt/argon2)\n",
+      "col_offset": 28,
+      "end_col_offset": 48,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'MY_ACTUAL_PASSWORD'",
+      "line_number": 101,
+      "line_range": [
+        101
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "101     assert user.password != 'MY_ACTUAL_PASSWORD'\n102     assert len(user.password) > 30 # Suggests hashing (bcrypt/argon2)\n103 \n",
+      "col_offset": 4,
+      "end_col_offset": 34,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 102,
+      "line_range": [
+        102
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "108     \"\"\"\n109     assert app.debug is False\n",
+      "col_offset": 4,
+      "end_col_offset": 29,
+      "filename": "password_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 109,
+      "line_range": [
+        109
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    }
+  ]
+}

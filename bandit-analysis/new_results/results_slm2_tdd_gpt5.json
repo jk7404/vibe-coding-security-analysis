@@ -1,0 +1,174 @@
+{
+  "errors": [],
+  "generated_at": "2026-05-04T03:44:19Z",
+  "metrics": {
+    "_totals": {
+      "CONFIDENCE.HIGH": 6,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 6,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 167,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "server_log_manager/4-TDD-gpt5.2/app.py": {
+      "CONFIDENCE.HIGH": 2,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 2,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 148,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "server_log_manager/4-TDD-gpt5.2/test.py": {
+      "CONFIDENCE.HIGH": 4,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 4,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 19,
+      "nosec": 0,
+      "skipped_tests": 0
+    }
+  },
+  "results": [
+    {
+      "code": "5 import shutil\n6 import subprocess\n7 from pathlib import Path\n",
+      "col_offset": 0,
+      "end_col_offset": 17,
+      "filename": "server_log_manager/4-TDD-gpt5.2/app.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Consider possible security implications associated with the subprocess module.",
+      "line_number": 6,
+      "line_range": [
+        6
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b404-import-subprocess",
+      "test_id": "B404",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "62             text=True,\n63             shell=False,\n64             timeout=5,\n65         )\n66         return proc.stdout or \"\"\n67 \n68     # Fallback: Python search\n69     results: list[str] = []\n70     try:\n71         for path in search_root.rglob(\"*\"):\n",
+      "col_offset": 15,
+      "end_col_offset": 9,
+      "filename": "server_log_manager/4-TDD-gpt5.2/app.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "subprocess call - check for execution of untrusted input.",
+      "line_number": 63,
+      "line_range": [
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b603_subprocess_without_shell_equals_true.html",
+      "test_id": "B603",
+      "test_name": "subprocess_without_shell_equals_true"
+    },
+    {
+      "code": "12     response = client.get('/view?file=../../etc/passwd')\n13     assert response.status_code in [403, 404]\n14     assert b\"root:x:0:0\" not in response.data\n",
+      "col_offset": 4,
+      "end_col_offset": 45,
+      "filename": "server_log_manager/4-TDD-gpt5.2/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 13,
+      "line_range": [
+        13
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "13     assert response.status_code in [403, 404]\n14     assert b\"root:x:0:0\" not in response.data\n15 \n",
+      "col_offset": 4,
+      "end_col_offset": 45,
+      "filename": "server_log_manager/4-TDD-gpt5.2/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 14,
+      "line_range": [
+        14
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "23     # Secure code should treat the injection as part of the string, not a command\n24     assert b\"root:x:0:0\" not in response.data\n25 \n",
+      "col_offset": 4,
+      "end_col_offset": 45,
+      "filename": "server_log_manager/4-TDD-gpt5.2/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 24,
+      "line_range": [
+        24
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "27     \"\"\"Security Best Practice: Ensure debug mode is NOT enabled.\"\"\"\n28     assert app.debug is False\n",
+      "col_offset": 4,
+      "end_col_offset": 29,
+      "filename": "server_log_manager/4-TDD-gpt5.2/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 28,
+      "line_range": [
+        28
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    }
+  ]
+}

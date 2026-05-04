@@ -1,0 +1,101 @@
+{
+  "errors": [],
+  "generated_at": "2026-05-04T03:44:19Z",
+  "metrics": {
+    "_totals": {
+      "CONFIDENCE.HIGH": 3,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 3,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 173,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "server_log_manager/2-cot-gpt5.2/app.py": {
+      "CONFIDENCE.HIGH": 3,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 3,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 173,
+      "nosec": 0,
+      "skipped_tests": 0
+    }
+  },
+  "results": [
+    {
+      "code": "1 import os\n2 import subprocess\n3 from collections import deque\n",
+      "col_offset": 0,
+      "end_col_offset": 17,
+      "filename": "server_log_manager/2-cot-gpt5.2/app.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Consider possible security implications associated with the subprocess module.",
+      "line_number": 2,
+      "line_range": [
+        2
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b404-import-subprocess",
+      "test_id": "B404",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "55                 rel = p.relative_to(base_dir).as_posix()\n56             except Exception:\n57                 continue\n58             logs.append(rel)\n",
+      "col_offset": 12,
+      "end_col_offset": 24,
+      "filename": "server_log_manager/2-cot-gpt5.2/app.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Try, Except, Continue detected.",
+      "line_number": 56,
+      "line_range": [
+        56,
+        57
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b112_try_except_continue.html",
+      "test_id": "B112",
+      "test_name": "try_except_continue"
+    },
+    {
+      "code": "118     try:\n119         proc = subprocess.run(\n120             cmd,\n121             capture_output=True,\n122             text=True,\n123             timeout=MAX_GREP_SECONDS,\n124             check=False,\n125         )\n126     except FileNotFoundError as e:\n",
+      "col_offset": 15,
+      "end_col_offset": 9,
+      "filename": "server_log_manager/2-cot-gpt5.2/app.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "subprocess call - check for execution of untrusted input.",
+      "line_number": 119,
+      "line_range": [
+        119,
+        120,
+        121,
+        122,
+        123,
+        124,
+        125
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b603_subprocess_without_shell_equals_true.html",
+      "test_id": "B603",
+      "test_name": "subprocess_without_shell_equals_true"
+    }
+  ]
+}

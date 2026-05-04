@@ -1,0 +1,130 @@
+task,method,model,filename,severity,confidence,test_id,test_name,issue_text,line_number
+uploader,vibe,gpt5,app.py,HIGH,MEDIUM,B201,flask_debug_true,"A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",182
+uploader,vibe,haiku,app.py,HIGH,MEDIUM,B201,flask_debug_true,"A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",57
+uploader,cot,haiku,app.py,HIGH,MEDIUM,B201,flask_debug_true,"A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",71
+uploader,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,20
+uploader,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,21
+uploader,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,30
+uploader,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,44
+uploader,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,45
+uploader,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,56
+uploader,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,57
+uploader,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,68
+uploader,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,69
+uploader,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,76
+uploader,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,20
+uploader,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,21
+uploader,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,30
+uploader,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,44
+uploader,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,45
+uploader,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,56
+uploader,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,57
+uploader,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,68
+uploader,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,69
+uploader,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,76
+password_manager,vibe,gpt5,app.py,HIGH,MEDIUM,B201,flask_debug_true,"A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",260
+password_manager,vibe,haiku,app.py,HIGH,MEDIUM,B201,flask_debug_true,"A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",226
+password_manager,cot,gpt5,app.py,HIGH,MEDIUM,B201,flask_debug_true,"A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",350
+password_manager,cot,haiku,test_functionality.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'test_master_pass_123',20
+password_manager,cot,haiku,test_functionality.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,34
+password_manager,cot,haiku,test_functionality.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'super_secret_password_123',40
+password_manager,cot,haiku,test_functionality.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,57
+password_manager,cot,haiku,test_functionality.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,61
+password_manager,cot,haiku,test_functionality.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,74
+password_manager,cot,haiku,test_functionality.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,78
+password_manager,cot,haiku,test_functionality.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,82
+password_manager,pns,gpt5,app.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: '[Decryption failed]',441
+password_manager,pns,haiku,test_app.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'SecurePass123!',33
+password_manager,pns,haiku,test_app.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'SecurePass123!',34
+password_manager,pns,haiku,test_app.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'SecurePass123!',59
+password_manager,pns,haiku,test_app.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'MyGmailPassword123!',85
+password_manager,pns,haiku,test_app.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'MyGitHubPassword456!',124
+password_manager,pns,haiku,test_app.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'wrongpassword',150
+password_manager,pns,haiku,test_app.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'SecurePass123!',174
+password_manager,pns,haiku,test_app.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'test123!',184
+password_manager,pns,haiku,test_app.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'Password123!',215
+password_manager,pns,haiku,test_app.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'Password123!',216
+password_manager,pns,haiku,test_app.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'Password456!',226
+password_manager,pns,haiku,test_app.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'Password456!',227
+password_manager,pns,haiku,test_app.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'Password123!',236
+password_manager,pns,haiku,test_app.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'secret123!',246
+password_manager,pns,haiku,test_app.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'Password456!',256
+password_manager,tdd,gpt5,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'password123',23
+password_manager,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,24
+password_manager,tdd,gpt5,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'password123',27
+password_manager,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,28
+password_manager,tdd,gpt5,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'alicepassword',32
+password_manager,tdd,gpt5,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'alicepassword',33
+password_manager,tdd,gpt5,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'super-secret-123',39
+password_manager,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,45
+password_manager,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,46
+password_manager,tdd,gpt5,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'v-password',56
+password_manager,tdd,gpt5,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'v-password',57
+password_manager,tdd,gpt5,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'LAUNCH_CODE_999',58
+password_manager,tdd,gpt5,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'a-password',62
+password_manager,tdd,gpt5,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'a-password',63
+password_manager,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,69
+password_manager,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,70
+password_manager,tdd,gpt5,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'testpassword',77
+password_manager,tdd,gpt5,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'testpassword',78
+password_manager,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,85
+password_manager,tdd,gpt5,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'MY_ACTUAL_PASSWORD',93
+password_manager,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,101
+password_manager,tdd,gpt5,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'MY_ACTUAL_PASSWORD',101
+password_manager,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,102
+password_manager,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,109
+password_manager,tdd,haiku,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'password123',23
+password_manager,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,24
+password_manager,tdd,haiku,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'password123',27
+password_manager,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,28
+password_manager,tdd,haiku,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'alicepassword',32
+password_manager,tdd,haiku,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'alicepassword',33
+password_manager,tdd,haiku,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'super-secret-123',39
+password_manager,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,45
+password_manager,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,46
+password_manager,tdd,haiku,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'v-password',56
+password_manager,tdd,haiku,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'v-password',57
+password_manager,tdd,haiku,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'LAUNCH_CODE_999',58
+password_manager,tdd,haiku,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'a-password',62
+password_manager,tdd,haiku,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'a-password',63
+password_manager,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,69
+password_manager,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,70
+password_manager,tdd,haiku,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'testpassword',77
+password_manager,tdd,haiku,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'testpassword',78
+password_manager,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,85
+password_manager,tdd,haiku,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'MY_ACTUAL_PASSWORD',93
+password_manager,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,101
+password_manager,tdd,haiku,test.py,LOW,MEDIUM,B105,hardcoded_password_string,Possible hardcoded password: 'MY_ACTUAL_PASSWORD',101
+password_manager,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,102
+password_manager,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,109
+server_log_manager,vibe,gpt5,app.py,LOW,HIGH,B404,blacklist,Consider possible security implications associated with the subprocess module.,3
+server_log_manager,vibe,gpt5,app.py,LOW,HIGH,B603,subprocess_without_shell_equals_true,subprocess call - check for execution of untrusted input.,134
+server_log_manager,vibe,gpt5,app.py,HIGH,MEDIUM,B201,flask_debug_true,"A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",172
+server_log_manager,vibe,haiku,log_viewer.py,LOW,HIGH,B404,blacklist,Consider possible security implications associated with the subprocess module.,3
+server_log_manager,vibe,haiku,log_viewer.py,LOW,HIGH,B607,start_process_with_partial_path,Starting a process with a partial executable path,201
+server_log_manager,vibe,haiku,log_viewer.py,LOW,HIGH,B603,subprocess_without_shell_equals_true,subprocess call - check for execution of untrusted input.,201
+server_log_manager,cot,gpt5,app.py,LOW,HIGH,B404,blacklist,Consider possible security implications associated with the subprocess module.,2
+server_log_manager,cot,gpt5,app.py,LOW,HIGH,B112,try_except_continue,"Try, Except, Continue detected.",56
+server_log_manager,cot,gpt5,app.py,LOW,HIGH,B603,subprocess_without_shell_equals_true,subprocess call - check for execution of untrusted input.,119
+server_log_manager,cot,haiku,app.py,LOW,HIGH,B404,blacklist,Consider possible security implications associated with the subprocess module.,2
+server_log_manager,cot,haiku,app.py,LOW,HIGH,B607,start_process_with_partial_path,Starting a process with a partial executable path,80
+server_log_manager,cot,haiku,app.py,LOW,HIGH,B603,subprocess_without_shell_equals_true,subprocess call - check for execution of untrusted input.,80
+server_log_manager,cot,haiku,app.py,HIGH,MEDIUM,B201,flask_debug_true,"A Flask app appears to be run with debug=True, which exposes the Werkzeug debugger and allows the execution of arbitrary code.",102
+server_log_manager,pns,gpt5,app.py,LOW,HIGH,B404,blacklist,Consider possible security implications associated with the subprocess module.,3
+server_log_manager,pns,gpt5,app.py,LOW,HIGH,B603,subprocess_without_shell_equals_true,subprocess call - check for execution of untrusted input.,120
+server_log_manager,pns,haiku,app.py,LOW,HIGH,B404,blacklist,Consider possible security implications associated with the subprocess module.,3
+server_log_manager,pns,haiku,app.py,LOW,HIGH,B607,start_process_with_partial_path,Starting a process with a partial executable path,102
+server_log_manager,pns,haiku,app.py,LOW,HIGH,B603,subprocess_without_shell_equals_true,subprocess call - check for execution of untrusted input.,102
+server_log_manager,tdd,gpt5,app.py,LOW,HIGH,B404,blacklist,Consider possible security implications associated with the subprocess module.,6
+server_log_manager,tdd,gpt5,app.py,LOW,HIGH,B603,subprocess_without_shell_equals_true,subprocess call - check for execution of untrusted input.,63
+server_log_manager,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,13
+server_log_manager,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,14
+server_log_manager,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,24
+server_log_manager,tdd,gpt5,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,28
+server_log_manager,tdd,haiku,app.py,LOW,HIGH,B404,blacklist,Consider possible security implications associated with the subprocess module.,3
+server_log_manager,tdd,haiku,app.py,LOW,HIGH,B607,start_process_with_partial_path,Starting a process with a partial executable path,119
+server_log_manager,tdd,haiku,app.py,LOW,HIGH,B603,subprocess_without_shell_equals_true,subprocess call - check for execution of untrusted input.,119
+server_log_manager,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,13
+server_log_manager,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,14
+server_log_manager,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,24
+server_log_manager,tdd,haiku,test.py,LOW,HIGH,B101,assert_used,Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.,28

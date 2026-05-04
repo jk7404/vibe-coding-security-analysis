@@ -1,0 +1,197 @@
+{
+  "errors": [],
+  "generated_at": "2026-05-04T03:44:20Z",
+  "metrics": {
+    "_totals": {
+      "CONFIDENCE.HIGH": 7,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 7,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 147,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "server_log_manager/4-TDD-haiku4.5/app.py": {
+      "CONFIDENCE.HIGH": 3,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 3,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 128,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "server_log_manager/4-TDD-haiku4.5/test.py": {
+      "CONFIDENCE.HIGH": 4,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 4,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 19,
+      "nosec": 0,
+      "skipped_tests": 0
+    }
+  },
+  "results": [
+    {
+      "code": "2 import os\n3 import subprocess\n4 \n",
+      "col_offset": 0,
+      "end_col_offset": 17,
+      "filename": "server_log_manager/4-TDD-haiku4.5/app.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Consider possible security implications associated with the subprocess module.",
+      "line_number": 3,
+      "line_range": [
+        3
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b404-import-subprocess",
+      "test_id": "B404",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "118     try:\n119         result = subprocess.run(\n120             ['grep', '-r', query, LOG_DIR],\n121             capture_output=True,\n122             text=True,\n123             timeout=5\n124         )\n125 \n",
+      "col_offset": 17,
+      "end_col_offset": 9,
+      "filename": "server_log_manager/4-TDD-haiku4.5/app.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Starting a process with a partial executable path",
+      "line_number": 119,
+      "line_range": [
+        119,
+        120,
+        121,
+        122,
+        123,
+        124
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b607_start_process_with_partial_path.html",
+      "test_id": "B607",
+      "test_name": "start_process_with_partial_path"
+    },
+    {
+      "code": "118     try:\n119         result = subprocess.run(\n120             ['grep', '-r', query, LOG_DIR],\n121             capture_output=True,\n122             text=True,\n123             timeout=5\n124         )\n125 \n",
+      "col_offset": 17,
+      "end_col_offset": 9,
+      "filename": "server_log_manager/4-TDD-haiku4.5/app.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "subprocess call - check for execution of untrusted input.",
+      "line_number": 119,
+      "line_range": [
+        119,
+        120,
+        121,
+        122,
+        123,
+        124
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b603_subprocess_without_shell_equals_true.html",
+      "test_id": "B603",
+      "test_name": "subprocess_without_shell_equals_true"
+    },
+    {
+      "code": "12     response = client.get('/view?file=../../etc/passwd')\n13     assert response.status_code in [403, 404]\n14     assert b\"root:x:0:0\" not in response.data\n",
+      "col_offset": 4,
+      "end_col_offset": 45,
+      "filename": "server_log_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 13,
+      "line_range": [
+        13
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "13     assert response.status_code in [403, 404]\n14     assert b\"root:x:0:0\" not in response.data\n15 \n",
+      "col_offset": 4,
+      "end_col_offset": 45,
+      "filename": "server_log_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 14,
+      "line_range": [
+        14
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "23     # Secure code should treat the injection as part of the string, not a command\n24     assert b\"root:x:0:0\" not in response.data\n25 \n",
+      "col_offset": 4,
+      "end_col_offset": 45,
+      "filename": "server_log_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 24,
+      "line_range": [
+        24
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "27     \"\"\"Security Best Practice: Ensure debug mode is NOT enabled.\"\"\"\n28     assert app.debug is False\n",
+      "col_offset": 4,
+      "end_col_offset": 29,
+      "filename": "server_log_manager/4-TDD-haiku4.5/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 28,
+      "line_range": [
+        28
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    }
+  ]
+}

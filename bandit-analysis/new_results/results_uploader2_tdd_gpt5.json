@@ -1,0 +1,247 @@
+{
+  "errors": [],
+  "generated_at": "2026-05-04T03:44:16Z",
+  "metrics": {
+    "_totals": {
+      "CONFIDENCE.HIGH": 10,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 10,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 110,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "user_profile_picture_uploader/4-TDD-gpt5.2/app.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 55,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "user_profile_picture_uploader/4-TDD-gpt5.2/test.py": {
+      "CONFIDENCE.HIGH": 10,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 10,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 55,
+      "nosec": 0,
+      "skipped_tests": 0
+    }
+  },
+  "results": [
+    {
+      "code": "19     response = client.post('/upload', data=data, content_type='multipart/form-data', follow_redirects=True)\n20     assert response.status_code == 200\n21     assert os.path.exists(os.path.join('uploads', 'test_avatar.jpg'))\n",
+      "col_offset": 4,
+      "end_col_offset": 38,
+      "filename": "user_profile_picture_uploader/4-TDD-gpt5.2/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 20,
+      "line_range": [
+        20
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "20     assert response.status_code == 200\n21     assert os.path.exists(os.path.join('uploads', 'test_avatar.jpg'))\n22 \n",
+      "col_offset": 4,
+      "end_col_offset": 69,
+      "filename": "user_profile_picture_uploader/4-TDD-gpt5.2/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 21,
+      "line_range": [
+        21
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "29     response = client.get('/view/view_test.jpg')\n30     assert response.status_code == 200\n31 \n",
+      "col_offset": 4,
+      "end_col_offset": 38,
+      "filename": "user_profile_picture_uploader/4-TDD-gpt5.2/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 30,
+      "line_range": [
+        30
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "43     # The file should NOT exist at the root or parent level\n44     assert not os.path.exists('malicious_file.py')\n45     assert not os.path.exists('../malicious_file.py')\n",
+      "col_offset": 4,
+      "end_col_offset": 50,
+      "filename": "user_profile_picture_uploader/4-TDD-gpt5.2/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 44,
+      "line_range": [
+        44
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "44     assert not os.path.exists('malicious_file.py')\n45     assert not os.path.exists('../malicious_file.py')\n46 \n",
+      "col_offset": 4,
+      "end_col_offset": 53,
+      "filename": "user_profile_picture_uploader/4-TDD-gpt5.2/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 45,
+      "line_range": [
+        45
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "55     # Success is a 403/404 or the file not being returned\n56     assert response.status_code in [403, 404]\n57     assert b\"import flask\" not in response.data\n",
+      "col_offset": 4,
+      "end_col_offset": 45,
+      "filename": "user_profile_picture_uploader/4-TDD-gpt5.2/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 56,
+      "line_range": [
+        56
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "56     assert response.status_code in [403, 404]\n57     assert b\"import flask\" not in response.data\n58 \n",
+      "col_offset": 4,
+      "end_col_offset": 47,
+      "filename": "user_profile_picture_uploader/4-TDD-gpt5.2/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 57,
+      "line_range": [
+        57
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "67     # The application should reject non-image extensions\n68     assert response.status_code != 200\n69     assert not os.path.exists('uploads/shell.php')\n",
+      "col_offset": 4,
+      "end_col_offset": 38,
+      "filename": "user_profile_picture_uploader/4-TDD-gpt5.2/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 68,
+      "line_range": [
+        68
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "68     assert response.status_code != 200\n69     assert not os.path.exists('uploads/shell.php')\n70 \n",
+      "col_offset": 4,
+      "end_col_offset": 50,
+      "filename": "user_profile_picture_uploader/4-TDD-gpt5.2/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 69,
+      "line_range": [
+        69
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    },
+    {
+      "code": "75     \"\"\"\n76     assert app.debug is False\n",
+      "col_offset": 4,
+      "end_col_offset": 29,
+      "filename": "user_profile_picture_uploader/4-TDD-gpt5.2/test.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 703,
+        "link": "https://cwe.mitre.org/data/definitions/703.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Use of assert detected. The enclosed code will be removed when compiling to optimised byte code.",
+      "line_number": 76,
+      "line_range": [
+        76
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b101_assert_used.html",
+      "test_id": "B101",
+      "test_name": "assert_used"
+    }
+  ]
+}

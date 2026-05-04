@@ -1,0 +1,453 @@
+{
+  "errors": [],
+  "generated_at": "2026-05-04T03:44:18Z",
+  "metrics": {
+    "_totals": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 15,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 15,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 595,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "password_manager/3-PnS-haiku4.5/app.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 196,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "password_manager/3-PnS-haiku4.5/forms.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 121,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "password_manager/3-PnS-haiku4.5/models.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 0,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 34,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "password_manager/3-PnS-haiku4.5/test_app.py": {
+      "CONFIDENCE.HIGH": 0,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 15,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 15,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 244,
+      "nosec": 0,
+      "skipped_tests": 0
+    }
+  },
+  "results": [
+    {
+      "code": "32         'email': 'testuser@example.com',\n33         'password': 'SecurePass123!',\n34         'confirm_password': 'SecurePass123!',\n35         'csrf_token': csrf_token\n36     }\n37 \n38     response = session.post(f\"{BASE_URL}/register\", data=data, allow_redirects=False)\n39 \n40     if response.status_code == 302:  # Redirect to login\n",
+      "col_offset": 8,
+      "end_col_offset": 18,
+      "filename": "password_manager/3-PnS-haiku4.5/test_app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'SecurePass123!'",
+      "line_number": 33,
+      "line_range": [
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "33         'password': 'SecurePass123!',\n34         'confirm_password': 'SecurePass123!',\n35         'csrf_token': csrf_token\n36     }\n37 \n38     response = session.post(f\"{BASE_URL}/register\", data=data, allow_redirects=False)\n39 \n40     if response.status_code == 302:  # Redirect to login\n41         print(\"\u2713 Registration successful - user redirected to login\")\n",
+      "col_offset": 8,
+      "end_col_offset": 26,
+      "filename": "password_manager/3-PnS-haiku4.5/test_app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'SecurePass123!'",
+      "line_number": 34,
+      "line_range": [
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "58         'username': 'testuser123',\n59         'password': 'SecurePass123!',\n60         'csrf_token': csrf_token\n61     }\n62 \n63     response = session.post(f\"{BASE_URL}/login\", data=data, allow_redirects=False)\n64 \n",
+      "col_offset": 8,
+      "end_col_offset": 18,
+      "filename": "password_manager/3-PnS-haiku4.5/test_app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'SecurePass123!'",
+      "line_number": 59,
+      "line_range": [
+        57,
+        58,
+        59,
+        60,
+        61
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "84         'username': 'myemail@gmail.com',\n85         'password': 'MyGmailPassword123!',\n86         'url': 'https://gmail.com',\n87         'csrf_token': csrf_token\n88     }\n89 \n90     response = session.post(f\"{BASE_URL}/credential/add\", data=data, allow_redirects=False)\n91 \n92     if response.status_code == 302:  # Redirect to dashboard\n",
+      "col_offset": 8,
+      "end_col_offset": 18,
+      "filename": "password_manager/3-PnS-haiku4.5/test_app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'MyGmailPassword123!'",
+      "line_number": 85,
+      "line_range": [
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "123         'username': 'myusername',\n124         'password': 'MyGitHubPassword456!',\n125         'url': 'https://github.com',\n126         'csrf_token': csrf_token\n127     }\n128     session.post(f\"{BASE_URL}/credential/add\", data=data, allow_redirects=False)\n129 \n130     # Search for Gmail\n131     response = session.get(f\"{BASE_URL}/dashboard?search_query=Gmail\")\n",
+      "col_offset": 8,
+      "end_col_offset": 18,
+      "filename": "password_manager/3-PnS-haiku4.5/test_app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'MyGitHubPassword456!'",
+      "line_number": 124,
+      "line_range": [
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "149         'username': 'wronguser',\n150         'password': 'wrongpassword',\n151         'csrf_token': csrf_token\n152     }\n153 \n154     response = session.post(f\"{BASE_URL}/login\", data=data)\n155 \n",
+      "col_offset": 8,
+      "end_col_offset": 18,
+      "filename": "password_manager/3-PnS-haiku4.5/test_app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'wrongpassword'",
+      "line_number": 150,
+      "line_range": [
+        148,
+        149,
+        150,
+        151,
+        152
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "173         'username': 'testuser123',\n174         'password': 'SecurePass123!',\n175         'csrf_token': csrf_token\n176     }\n177     session.post(f\"{BASE_URL}/login\", data=data)\n178 \n179     # Try to add credential with XSS payload\n",
+      "col_offset": 8,
+      "end_col_offset": 18,
+      "filename": "password_manager/3-PnS-haiku4.5/test_app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'SecurePass123!'",
+      "line_number": 174,
+      "line_range": [
+        172,
+        173,
+        174,
+        175,
+        176
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "183         'username': 'test',\n184         'password': 'test123!',\n185         'url': '',\n186         'csrf_token': csrf_token\n187     }\n188 \n189     response = session.post(f\"{BASE_URL}/credential/add\", data=data, allow_redirects=False)\n190 \n191     # Check if the dashboard escapes the script tag\n",
+      "col_offset": 8,
+      "end_col_offset": 18,
+      "filename": "password_manager/3-PnS-haiku4.5/test_app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'test123!'",
+      "line_number": 184,
+      "line_range": [
+        181,
+        182,
+        183,
+        184,
+        185,
+        186,
+        187
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "214         'email': 'user1test@example.com',\n215         'password': 'Password123!',\n216         'confirm_password': 'Password123!',\n217         'csrf_token': csrf_token\n218     }\n219     session1.post(f\"{BASE_URL}/register\", data=data)\n220 \n221     # Register user 2\n222     csrf_token = get_csrf_token(session2, f\"{BASE_URL}/register\")\n",
+      "col_offset": 8,
+      "end_col_offset": 18,
+      "filename": "password_manager/3-PnS-haiku4.5/test_app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'Password123!'",
+      "line_number": 215,
+      "line_range": [
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        218
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "215         'password': 'Password123!',\n216         'confirm_password': 'Password123!',\n217         'csrf_token': csrf_token\n218     }\n219     session1.post(f\"{BASE_URL}/register\", data=data)\n220 \n221     # Register user 2\n222     csrf_token = get_csrf_token(session2, f\"{BASE_URL}/register\")\n223     data = {\n",
+      "col_offset": 8,
+      "end_col_offset": 26,
+      "filename": "password_manager/3-PnS-haiku4.5/test_app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'Password123!'",
+      "line_number": 216,
+      "line_range": [
+        212,
+        213,
+        214,
+        215,
+        216,
+        217,
+        218
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "225         'email': 'user2test@example.com',\n226         'password': 'Password456!',\n227         'confirm_password': 'Password456!',\n228         'csrf_token': csrf_token\n229     }\n230     session2.post(f\"{BASE_URL}/register\", data=data)\n231 \n232     # User 1 login and add credential\n233     csrf_token = get_csrf_token(session1, f\"{BASE_URL}/login\")\n",
+      "col_offset": 8,
+      "end_col_offset": 18,
+      "filename": "password_manager/3-PnS-haiku4.5/test_app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'Password456!'",
+      "line_number": 226,
+      "line_range": [
+        223,
+        224,
+        225,
+        226,
+        227,
+        228,
+        229
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "226         'password': 'Password456!',\n227         'confirm_password': 'Password456!',\n228         'csrf_token': csrf_token\n229     }\n230     session2.post(f\"{BASE_URL}/register\", data=data)\n231 \n232     # User 1 login and add credential\n233     csrf_token = get_csrf_token(session1, f\"{BASE_URL}/login\")\n234     data = {\n",
+      "col_offset": 8,
+      "end_col_offset": 26,
+      "filename": "password_manager/3-PnS-haiku4.5/test_app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'Password456!'",
+      "line_number": 227,
+      "line_range": [
+        223,
+        224,
+        225,
+        226,
+        227,
+        228,
+        229
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "235         'username': 'user1test',\n236         'password': 'Password123!',\n237         'csrf_token': csrf_token\n238     }\n239     session1.post(f\"{BASE_URL}/login\", data=data)\n240 \n241     # User 1 adds a credential\n",
+      "col_offset": 8,
+      "end_col_offset": 18,
+      "filename": "password_manager/3-PnS-haiku4.5/test_app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'Password123!'",
+      "line_number": 236,
+      "line_range": [
+        234,
+        235,
+        236,
+        237,
+        238
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "245         'username': 'user1secret',\n246         'password': 'secret123!',\n247         'url': '',\n248         'csrf_token': csrf_token\n249     }\n250     session1.post(f\"{BASE_URL}/credential/add\", data=data)\n251 \n252     # User 2 login\n253     csrf_token = get_csrf_token(session2, f\"{BASE_URL}/login\")\n",
+      "col_offset": 8,
+      "end_col_offset": 18,
+      "filename": "password_manager/3-PnS-haiku4.5/test_app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'secret123!'",
+      "line_number": 246,
+      "line_range": [
+        243,
+        244,
+        245,
+        246,
+        247,
+        248,
+        249
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    },
+    {
+      "code": "255         'username': 'user2test',\n256         'password': 'Password456!',\n257         'csrf_token': csrf_token\n258     }\n259     session2.post(f\"{BASE_URL}/login\", data=data)\n260 \n261     # User 2 tries to access credential ID 1\n",
+      "col_offset": 8,
+      "end_col_offset": 18,
+      "filename": "password_manager/3-PnS-haiku4.5/test_app.py",
+      "issue_confidence": "MEDIUM",
+      "issue_cwe": {
+        "id": 259,
+        "link": "https://cwe.mitre.org/data/definitions/259.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Possible hardcoded password: 'Password456!'",
+      "line_number": 256,
+      "line_range": [
+        254,
+        255,
+        256,
+        257,
+        258
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b105_hardcoded_password_string.html",
+      "test_id": "B105",
+      "test_name": "hardcoded_password_string"
+    }
+  ]
+}

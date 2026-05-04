@@ -1,0 +1,108 @@
+{
+  "errors": [],
+  "generated_at": "2026-05-04T03:44:19Z",
+  "metrics": {
+    "_totals": {
+      "CONFIDENCE.HIGH": 3,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 3,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 102,
+      "nosec": 0,
+      "skipped_tests": 0
+    },
+    "server_log_manager/3-PnS-haiku4.5/app.py": {
+      "CONFIDENCE.HIGH": 3,
+      "CONFIDENCE.LOW": 0,
+      "CONFIDENCE.MEDIUM": 0,
+      "CONFIDENCE.UNDEFINED": 0,
+      "SEVERITY.HIGH": 0,
+      "SEVERITY.LOW": 3,
+      "SEVERITY.MEDIUM": 0,
+      "SEVERITY.UNDEFINED": 0,
+      "loc": 102,
+      "nosec": 0,
+      "skipped_tests": 0
+    }
+  },
+  "results": [
+    {
+      "code": "2 import re\n3 import subprocess\n4 from pathlib import Path\n",
+      "col_offset": 0,
+      "end_col_offset": 17,
+      "filename": "server_log_manager/3-PnS-haiku4.5/app.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Consider possible security implications associated with the subprocess module.",
+      "line_number": 3,
+      "line_range": [
+        3
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/blacklists/blacklist_imports.html#b404-import-subprocess",
+      "test_id": "B404",
+      "test_name": "blacklist"
+    },
+    {
+      "code": "101     try:\n102         result = subprocess.run(\n103             ['grep', '-n', search_term, resolved_path],\n104             capture_output=True,\n105             text=True,\n106             timeout=5,\n107             encoding='utf-8',\n108             errors='ignore'\n109         )\n110 \n",
+      "col_offset": 17,
+      "end_col_offset": 9,
+      "filename": "server_log_manager/3-PnS-haiku4.5/app.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "Starting a process with a partial executable path",
+      "line_number": 102,
+      "line_range": [
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b607_start_process_with_partial_path.html",
+      "test_id": "B607",
+      "test_name": "start_process_with_partial_path"
+    },
+    {
+      "code": "101     try:\n102         result = subprocess.run(\n103             ['grep', '-n', search_term, resolved_path],\n104             capture_output=True,\n105             text=True,\n106             timeout=5,\n107             encoding='utf-8',\n108             errors='ignore'\n109         )\n110 \n",
+      "col_offset": 17,
+      "end_col_offset": 9,
+      "filename": "server_log_manager/3-PnS-haiku4.5/app.py",
+      "issue_confidence": "HIGH",
+      "issue_cwe": {
+        "id": 78,
+        "link": "https://cwe.mitre.org/data/definitions/78.html"
+      },
+      "issue_severity": "LOW",
+      "issue_text": "subprocess call - check for execution of untrusted input.",
+      "line_number": 102,
+      "line_range": [
+        102,
+        103,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109
+      ],
+      "more_info": "https://bandit.readthedocs.io/en/1.9.4/plugins/b603_subprocess_without_shell_equals_true.html",
+      "test_id": "B603",
+      "test_name": "subprocess_without_shell_equals_true"
+    }
+  ]
+}
